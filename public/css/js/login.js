@@ -32,7 +32,7 @@ const loginFormHandler = async (event) => {
     if (username && email && password) {
       const response = await fetch('/api/users', {
         method: 'POST',
-        body: JSON.stringify({ usernamename, email, password }),
+        body: JSON.stringify({ username, email, password }),
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -42,4 +42,12 @@ const loginFormHandler = async (event) => {
         alert(response.statusText);
       }
     }
-  }
+  };
+
+  document
+  .querySelector('.login-form')
+  .addEventListener('submit', loginFormHandler);
+
+  document
+  .querySelector('.signup-form')
+  .addEventListener('submit', signupFormHandler);
