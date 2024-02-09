@@ -34,8 +34,8 @@ function createGrid(numRows, numBoxesPerRow) {
     const table = document.getElementById("squaresTable");
     table.appendChild(createFirstRow(numBoxesPerRow))
     for (let i = 0; i < numRows; i++) {
-        const row = createRow(numBoxesPerRow);
-        table.appendChild(row);
+        const rows = createRow(numBoxesPerRow);
+        table.appendChild(rows);
     }
 }
 
