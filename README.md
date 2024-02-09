@@ -2,21 +2,13 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+Who doesn't like organized gambling? Sports Squares is a fun interacitve application that lets you, the user, participate in the sports squares game. The game involves a grid divided into rows and columns, typically 10 by 10, resulting in 100 squares. One team is represented by the rows, and the other team is represented by columns. Squares can be purchased and users can select whatever squares they choose. Once all the squares are sold or when all players have purchased and selected squares to their liking. The game can begin!
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+Numbers ranging from 0 to 9 are randomly assigned to the rows and columns. Each row and column will have a unique combination of numbers.
 
-## Table of Contents (Optional)
+At the end of each quarter (first, second, third, and final), the score of the game is matched to the corresponding numbers on the grid. For example, if at the end of the first quarter the home team has 7 points and the away team has 3 points, the square where the row is labeled "7" and the column is labeled "3" is the winning square for that quarter. This process is repeated for each quarter and sometimes for the final score as well.
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+Participants who have squares corresponding to the last digit of the scores for each quarter or the final score win the prizes. Prizes are typically awarded for each quarter, making multiple opportunities to win throughout the game. The largest prize is allotted for the final score.
 
 ## Installation
 
@@ -24,42 +16,23 @@ What are the steps required to install your project? Provide a step-by-step desc
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
+Navigate to the website to begin by clicking the link below. Once there login or sign up for an account. Once you are logged in choose a game to play in. Select your squares before the sports event begins. Once the sports event starts the board is locked and numbers are revealed.
 
 ![alt text](assets/images/screenshot.png)
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
+Kyle Gruschow
+https://github.com/KyleGru
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+Zachary Smith
+https://github.com/smithz852
 
-If you followed tutorials, include links to those here as well.
+Ryan Bedard
+https://github.com/ryanjbedard
 
 ## License
 
 The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
 
 ---
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/nielsenjared/badmath)
-
-Badges aren't necessary, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute to it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
