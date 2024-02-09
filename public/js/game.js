@@ -1,17 +1,19 @@
 
-let sportsAPI = ''
 
-function getScores() {
-  let sportsAPI = 'https://replay.sportsdata.io/api/v3/nfl/pbp/json/playbyplay/18401?key=578baa9fb5a74579836eba8e448bca6b';
+function getSportApi() {
+    // replace `octocat` with anyone else's GitHub username
+    var requestUrl = '/api/sportFetch';
+  
+    fetch(requestUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+       console.log(data)
+      });
+  }
 
-  fetch(sportsAPI).then(function(response) {
-    return response.json();
-}).then(function(data) {
-    console.log('Data', data);
-})
-}
-
-getScores();
+  getSportApi();
 
 function createFirstRow(questionBoxes) {
     const firstRow = document.createElement('tr');
