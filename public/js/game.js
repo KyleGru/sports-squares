@@ -6,8 +6,8 @@ function createFirstRow(questionBoxes) {
             cell.textContent = '';
         } else{
             cell.textContent = '?';
-        }
-        cell.classList.add('question-box');
+            cell.classList.add('question-box');
+        };
         firstRow.appendChild(cell);
     }
     return firstRow;
@@ -19,8 +19,10 @@ function createRow(numBoxes) {
         const cell = document.createElement("td");
         if (i === 0) {
             cell.textContent = "?";
+            cell.classList.add("question-box");
         } else {
             cell.textContent = "Open";
+            cell.classList.add("open-box");
         }
         row.appendChild(cell);
     }
@@ -39,3 +41,30 @@ function createGrid(numRows, numBoxesPerRow) {
 
 // Call the function to generate the grid with 10 rows and 11 boxes per row
 createGrid(10, 11);
+
+function selectOpenBox() {
+    const openBoxes = document.querySelectorAll('.open-box');
+    openBoxes.forEach((box => {
+        box.addEventListener('click', handleClick);
+
+    }))
+}
+
+function handleClick(event) {
+    event.target.textContent = event.target.textContent === 'Open' ? username.name : 'Open';
+}
+selectOpenBox();
+
+
+
+
+function startGame() {
+    setTimeout(() => {
+        document.querySelector('.question-box').forEach(square => {
+            const randomNumber = Math.floor(Math.random() * 10) + 1;
+            square.textContent = randomNumber;
+        });
+    }, 5000);
+}
+
+startGame();
