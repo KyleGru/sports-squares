@@ -5,6 +5,14 @@ const hbs = exphbs.create({ helpers: require("./utils/helpers") });
 const routes = require("./controllers");
 const sequelize = require("./config/connection");
 const path = require("path");
+const cors = require('cors');
+
+const corsOptions = {
+  origin: "http://localhost:3001",
+};
+
+
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,6 +34,8 @@ const sess = {
     db: sequelize,
   }),
 };
+
+app.use(cors(corsOptions));
 
 // Activate when mySQL is added.
 app.use(session(sess));
