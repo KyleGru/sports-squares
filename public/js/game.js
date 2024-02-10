@@ -18,7 +18,8 @@ function createFirstRow(questionBoxes) {
     for (let i = 0; i < questionBoxes; i++) {
         const cell = document.createElement('td');
         if (i === 0) {
-            cell.textContent = '';
+            cell.textContent = 'X';
+            cell.classList.add('X-box');
         } else{
             cell.textContent = '?';
             cell.classList.add('question-box');
@@ -29,16 +30,11 @@ function createFirstRow(questionBoxes) {
 }
 // Function to create a single row with question mark box followed by "Open" boxes
 function createRow(numBoxes) {
-    const row = document.createElement("tr");
+    const row = document.createElement('tr');
     for (let i = 0; i < numBoxes; i++) {
-        const cell = document.createElement("td");
-        if (i === 0) {
-            cell.textContent = "?";
-            cell.classList.add("question-box");
-        } else {
-            cell.textContent = "Open";
-            cell.classList.add("open-box");
-        }
+        const cell = document.createElement('td');
+        cell.textContent = i === 0 ? '?' : 'Open';
+        cell.classList.add(i === 0 ? 'question-box' : 'open-box');
         row.appendChild(cell);
     }
     return row;

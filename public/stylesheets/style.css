@@ -1,0 +1,79 @@
+body {
+    background-color: #5de1f060; /* Set your desired background color here */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    min-height: 100vh; /* Ensure the entire viewport height is covered */
+}
+
+.wrapper {
+    text-align: center; /* Center content inside the wrapper */
+    padding: 20px;
+}
+
+img {
+    display: block;
+    margin: 0 auto; /* Center the logo horizontally */
+}
+
+/* .question-box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px; 
+}*/
+
+/* .open-box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
+} */
+
+/* CSS styles for the game board layout */
+/* CSS styles for the game board layout */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 columns for digits 0-9 */
+    grid-template-rows: repeat(10, 1fr); /* 10 rows for digits 0-9 */
+    gap: 5px; /* Gap between grid items */
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .question-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    /* Additional styling for question boxes */
+  }
+  
+  .open-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    /* Additional styling for open boxes */
+  }
+  
+ /* CSS styles for the game board layout */
+#squaresTable {
+    border-collapse: collapse; /* Ensure consistent border spacing */
+  }
+  
+  #squaresTable td {
+    padding: 10px; /* Adjust padding as needed for spacing */
+    border: 1px solid black; /* Add borders to cells for visual clarity */
+    text-align: center; /* Center-align content in cells */
+  }
+  
+  
