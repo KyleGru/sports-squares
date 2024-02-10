@@ -1,7 +1,6 @@
 
 
 function getSportApi() {
-    // replace `octocat` with anyone else's GitHub username
     var requestUrl = '/api/sportFetch';
   
     fetch(requestUrl)
@@ -13,6 +12,7 @@ function getSportApi() {
        console.log('Quarter: ', data.Score.QuarterDescription);
        console.log(data.Score.AwayTeam, 'Score:', data.Score.AwayScore);
        console.log(data.Score.HomeTeam, 'Score:', data.Score.HomeScore);
+       renderGameInfo(data)
       });
   }
 
@@ -75,7 +75,21 @@ function handleClick(event) {
 }
 selectOpenBox();
 
+function renderGameInfo(data) {
+    const homeTeam = document.querySelector(".homeTeam")
+    const awayTeam = document.querySelector(".awayTeam")
+    const quarter = document.querySelector(".quarter")
+    const homeScore = document.querySelector(".homeScore")
+    const awayScore = document.querySelector(".awayScore")
 
+    // data.Score.HomeTeam, 'Score:', data.Score.HomeScore
+
+    homeTeam.textContent = `${data.Score.HomeTeam}`
+    awayTeam.textContent = `${data.Score.AwayTeam}`
+    quarter.textContent = `${data.Score.QuarterDescription}`
+    homeScore.textContent = `${data.Score.HomeScore}`
+    awayScore.textContent = `${data.Score.AwayScore}`
+}
 
 
 function startGame() {
