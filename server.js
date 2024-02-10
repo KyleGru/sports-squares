@@ -7,10 +7,6 @@ const sequelize = require("./config/connection");
 const path = require("path");
 const cors = require('cors');
 
-const corsOptions = {
-  origin: "http://localhost:3001",
-};
-
 
 
 
@@ -35,7 +31,7 @@ const sess = {
   }),
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Activate when mySQL is added.
 app.use(session(sess));

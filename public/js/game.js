@@ -1,17 +1,22 @@
 
-let sportsAPI = ''
 
-function getScores() {
-  let sportsAPI = 'https://replay.sportsdata.io/api/v3/nfl/pbp/json/playbyplay/18401?key=578baa9fb5a74579836eba8e448bca6b';
+function getSportApi() {
+    var requestUrl = '/api/sportFetch';
+  
+    fetch(requestUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+       console.log(data);
+       console.log('Quarter: ', data.Score.QuarterDescription);
+       console.log(data.Score.AwayTeam, 'Score:', data.Score.AwayScore);
+       console.log(data.Score.HomeTeam, 'Score:', data.Score.HomeScore);
+       renderGameInfo(data)
+      });
+  }
 
-  fetch(sportsAPI).then(function(response) {
-    return response.json();
-}).then(function(data) {
-    console.log('Data', data);
-})
-}
-
-getScores();
+  getSportApi();
 
 function createFirstRow(questionBoxes) {
     const firstRow = document.createElement('tr');
@@ -66,7 +71,21 @@ function handleClick(event) {
 }
 selectOpenBox();
 
+function renderGameInfo(data) {
+    const homeTeam = document.querySelector(".homeTeam")
+    const awayTeam = document.querySelector(".awayTeam")
+    const quarter = document.querySelector(".quarter")
+    const homeScore = document.querySelector(".homeScore")
+    const awayScore = document.querySelector(".awayScore")
 
+    // data.Score.HomeTeam, 'Score:', data.Score.HomeScore
+
+    homeTeam.textContent = `${data.Score.HomeTeam}`
+    awayTeam.textContent = `${data.Score.AwayTeam}`
+    quarter.textContent = `${data.Score.QuarterDescription}`
+    homeScore.textContent = `${data.Score.HomeScore}`
+    awayScore.textContent = `${data.Score.AwayScore}`
+}
 
 
 function startGame() {
