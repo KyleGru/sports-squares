@@ -9,7 +9,10 @@ function getSportApi() {
         return response.json();
       })
       .then(function (data) {
-       console.log(data)
+       console.log(data);
+       console.log('Quarter: ', data.Score.QuarterDescription);
+       console.log(data.Score.AwayTeam, 'Score:', data.Score.AwayScore);
+       console.log(data.Score.HomeTeam, 'Score:', data.Score.HomeScore);
       });
   }
 
