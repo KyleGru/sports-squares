@@ -28,8 +28,8 @@ h2 {
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(10, 1fr); /* 10 columns for digits 0-9 */
-    grid-template-rows: repeat(10, 1fr); /* 10 rows for digits 0-9 */
+    grid-template-columns: repeat(11, 1fr); /* 10 columns for digits 0-9 */
+    grid-template-rows: repeat(11, 1fr); /* 10 rows for digits 0-9 */
     gap: 5px; /* Gap between grid items */
   }
   
@@ -66,6 +66,7 @@ h2 {
   
  /* CSS styles for the game board layout */
 #squaresTable {
+    width: 100%;
     border-collapse: collapse; /* Ensure consistent border spacing */
   }
   
