@@ -15,7 +15,7 @@ router.get('/:score_id', async (req, res) => {
 
 const gameData = req.params.score_id
 console.log(gameData);
-  let sportsAPI = `https://replay.sportsdata.io/api/v3/nfl/stats/json/boxscorebyscoreidv3/${gameData}?key=ace8a9e3cd5b45e58e5670908b12cd03`;
+  let sportsAPI = `https://replay.sportsdata.io/api/v3/nfl/stats/json/boxscorebyscoreidv3/${gameData}?key=990e10adf1584c46a239ce3489ebc9c7`;
   console.log(sportsAPI)
   fetch(sportsAPI).then(function(response) {
     return response.json();
