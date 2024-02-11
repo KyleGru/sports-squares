@@ -18,6 +18,10 @@ img {
     margin: 0 auto; /* Center the logo horizontally */
 }
 
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
 h2 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
