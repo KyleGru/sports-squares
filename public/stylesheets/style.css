@@ -18,24 +18,10 @@ img {
     margin: 0 auto; /* Center the logo horizontally */
 }
 
-/* .question-box {
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    display: inline-block;
-    margin: 5px; 
-}*/
+h2 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
 
-/* .open-box {
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    display: inline-block;
-    margin: 5px;
-} */
-
-/* CSS styles for the game board layout */
-/* CSS styles for the game board layout */
 .game-board {
     display: grid;
     grid-template-columns: repeat(10, 1fr); /* 10 columns for digits 0-9 */
@@ -46,6 +32,10 @@ img {
   .row {
     display: flex;
   }
+
+  td .x-box {
+    display: none;
+  }
   
   .question-box {
     flex: 1;
@@ -53,7 +43,9 @@ img {
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    /* Additional styling for question boxes */
+    background-color: rgb(238, 3, 39);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
   }
   
   .open-box {
@@ -62,7 +54,10 @@ img {
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    /* Additional styling for open boxes */
+    cursor: pointer;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 100;
+    background-color: azure;
   }
   
  /* CSS styles for the game board layout */
