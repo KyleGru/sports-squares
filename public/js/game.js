@@ -1,7 +1,7 @@
 
-
+// get game info by game id
 function getSportApi() {
-    var requestUrl = '/api/sportFetch';
+    let requestUrl = '/api/sportFetch';
   
     fetch(requestUrl)
       .then(function (response) {
@@ -17,6 +17,20 @@ function getSportApi() {
   }
 
   getSportApi();
+  getGameList();
+
+function getGameList() {
+    let requestUrl = '/api/gamesAvailable';
+  
+    fetch(requestUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+       console.log('game date: ', data);
+       selectGame(data);
+      });
+}
 
 function createFirstRow(questionBoxes) {
     const firstRow = document.createElement('tr');
@@ -85,6 +99,17 @@ function renderGameInfo(data) {
     quarter.textContent = `${data.Score.QuarterDescription}`
     homeScore.textContent = `${data.Score.HomeScore}`
     awayScore.textContent = `${data.Score.AwayScore}`
+}
+
+function selectGame(data) {
+    const gameChoice = document.querySelector(".gameChoices")
+    let choice = document.createElement('li')
+
+    for(var i = 0; i < data.length; i++) {
+        choice.textContent = `${data[i].HomeTeam} vs ${data[i].AwayTeam}`
+        choice.style.cssText = 'list-style: none;'
+        gameChoice.appendChild(choice);
+    }
 }
 
 
