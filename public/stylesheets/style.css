@@ -1,5 +1,5 @@
 body {
-    background-color: #5de1f060; /* Set your desired background color here */
+  background-image: linear-gradient(to right bottom, #fbc737, #f4c93d, #eccb44, #e6cd4a, #dfcf51, #dfd25c, #e0d667, #e0d972, #e7df83, #ede494, #f3eaa4, #f9f0b5);
     margin: 0;
     padding: 0;
     display: flex;
@@ -26,6 +26,57 @@ h2 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+/* login/signup styling */
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.login-card {
+  margin-right: 10px;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  padding: 10px;
+  
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.btn-primary {
+  background-color: rgb(238, 3, 39);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #980202;
+}
+
+/* Game styling */
 .game-board {
     display: grid;
     grid-template-columns: repeat(11, 1fr); /* 10 columns for digits 0-9 */

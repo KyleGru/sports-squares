@@ -7,7 +7,7 @@ router.use("/api", apiRoutes);
 router.use("/", homeRoutes);
 
 router.get('/', async(req, res) => {
-     res.render('game')
+     res.render('login')
 })
 
 module.exports = router;
