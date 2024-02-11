@@ -32,19 +32,54 @@ function getSportApi(scoreId) {
     }, 1000)
   }
 
- 
-  getGameList();
+  function fetchByDate(currentTime) {
+    let requestUrl = `/api/gamesAvailable`;
+    console.log('Post Time', currentTime)
+    fetch(requestUrl, {
+       method: "POST",
+       body: JSON.stringify({ 
+        date: currentTime 
+    }),
+       headers: { 'Content-Type': 'application/json' }
+    })
 
-function getGameList() {
-    let requestUrl = '/api/gamesAvailable';
+    setTimeout( () => {
+        getGameList(currentTime);
+    }, 1000)
+  }
+  
+
+ 
+//   getGameList();
+
+function getGameList(currentTime) {
+    let requestUrl = `/api/gamesAvailable/${currentTime}`;
   
     fetch(requestUrl)
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-       console.log('game date: ', data);
+       console.log('Game List: ', data);
        selectGame(data);
+      });
+}
+
+getCurrentDate();
+
+function getCurrentDate() {
+    let requestUrl = `/api/gameDateInfo`;
+    
+    fetch(requestUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+       console.log('date data: ', data);
+       let timeData = data.CurrentTime;
+       let currentTime = timeData.substr(0, 10)
+       console.log('Time Formated: ', currentTime)
+       fetchByDate(currentTime);
       });
 }
 
@@ -119,9 +154,10 @@ function renderGameInfo(data) {
 
 function selectGame(data) {
     const gameChoice = document.querySelector(".gameChoices")
-    let choice = document.createElement('button')
-
+    
+     console.log('Select Game', data)
     for(var i = 0; i < data.length; i++) {
+        let choice = document.createElement('button')
         choice.textContent = `${data[i].HomeTeam} vs ${data[i].AwayTeam}`
         choice.style.cssText = 'list-style: none;'
         gameChoice.appendChild(choice);
