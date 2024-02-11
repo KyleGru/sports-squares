@@ -1,14 +1,40 @@
+
 const router = require("express").Router();
+const { GameDates } = require('../../models')
 
-let gamesDate = 'https://replay.sportsdata.io/api/v3/nfl/stats/json/scoresbydate/2023-11-27?key=df6589421f9c434db10cf32fc544ccbe';
+router.get('/', async (req, res) => {
+  try {
+    const dateData = await GameDates.findAll();
+    res.status(200).json(dateData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-router.get('/', (req, res) => {
-  fetch(gamesDate).then(function(response) {
+router.get('/:date', async (req, res) => {
+
+const dateData = req.params.date
+console.log(dateData);
+  let sportsAPI = `https://replay.sportsdata.io/api/v3/nfl/stats/json/scoresbydate/${dateData}?key=ace8a9e3cd5b45e58e5670908b12cd03`;
+  console.log('Date API: ', sportsAPI)
+  fetch(sportsAPI).then(function(response) {
     return response.json();
 }).then(function(data) {
     res.json(data);
  })
 })
+
+router.post('/', async (req, res) => {
+  // create a new list of games by date
+  try {
+    const dateData = await GameDates.create({
+      date: req.body.date
+    });
+    res.status(200).json(dateData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
   
 
 module.exports = router
