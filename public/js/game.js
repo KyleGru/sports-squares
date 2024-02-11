@@ -97,7 +97,7 @@ function selectOpenBox() {
 }
 
 function handleClick(event) {
-    event.target.textContent = event.target.textContent === 'Open' ? username.name : 'Open';
+    event.target.textContent = 'X'
 }
 selectOpenBox();
 
@@ -140,10 +140,10 @@ function selectGame(data) {
 
 function startGame() {
     setTimeout(() => {
-        document.querySelector('.question-box').forEach(square => {
-            const randomNumber = Math.floor(Math.random() * 10) + 1;
-            square.textContent = randomNumber;
-        });
+            const questionBox = document.querySelector('.question-box');
+            const randomNumber = Math.floor(Math.random() * 9) + 1;
+            questionBox.textContent = randomNumber;
+        
     }, 5000);
 }
 
