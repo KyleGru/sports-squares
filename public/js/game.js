@@ -1,14 +1,14 @@
 
 // get game info by game id
-function getSportApi() {
-    let requestUrl = '/api/sportFetch';
+function getSportApi(scoreId) {
+    let requestUrl = `/api/sportFetch/${scoreId}`;
   
     fetch(requestUrl)
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-       console.log(data);
+       console.log('info', data);
        console.log('Quarter: ', data.Score.QuarterDescription);
        console.log(data.Score.AwayTeam, 'Score:', data.Score.AwayScore);
        console.log(data.Score.HomeTeam, 'Score:', data.Score.HomeScore);
@@ -16,7 +16,23 @@ function getSportApi() {
       });
   }
 
-  getSportApi();
+  function fetchById(scoreId) {
+    let requestUrl = `/api/sportFetch`;
+    console.log('scoreID', scoreId)
+    fetch(requestUrl, {
+       method: "POST",
+       body: JSON.stringify({ 
+        score_id: scoreId 
+    }),
+       headers: { 'Content-Type': 'application/json' }
+    })
+
+    setTimeout( () => {
+        getSportApi(scoreId);
+    }, 1000)
+  }
+
+ 
   getGameList();
 
 function getGameList() {
@@ -103,12 +119,21 @@ function renderGameInfo(data) {
 
 function selectGame(data) {
     const gameChoice = document.querySelector(".gameChoices")
-    let choice = document.createElement('li')
+    let choice = document.createElement('button')
 
     for(var i = 0; i < data.length; i++) {
         choice.textContent = `${data[i].HomeTeam} vs ${data[i].AwayTeam}`
         choice.style.cssText = 'list-style: none;'
         gameChoice.appendChild(choice);
+        localStorage.setItem(`${data[i].HomeTeam}&${data[i].AwayTeam}`, `${data[i].ScoreID}`);
+        let keyData = `${data[i].HomeTeam}&${data[i].AwayTeam}`
+
+        choice.onclick = function() {
+            console.log('click', keyData)
+            let scoreId = localStorage.getItem(keyData);
+             fetchById(scoreId);
+             console.log(scoreId)
+        }
     }
 }
 
