@@ -5,7 +5,7 @@ const apiRoutes = require("./api");
 router.use("/api", apiRoutes);
 
 router.get('/', async(req, res) => {
-    res.render('game')
+     res.render('game')
 })
 
 module.exports = router;

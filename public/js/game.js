@@ -103,8 +103,13 @@ function createRow(numBoxes) {
     const row = document.createElement('tr');
     for (let i = 0; i < numBoxes; i++) {
         const cell = document.createElement('td');
-        cell.textContent = i === 0 ? '?' : 'Open';
-        cell.classList.add(i === 0 ? 'question-box' : 'open-box');
+        if (i === 0) {
+            cell.textContent = '?';
+            cell.classList.add('question-box');
+        } else {
+            cell.textContent = 'Open';
+            cell.classList.add('open-box');
+        }
         row.appendChild(cell);
     }
     return row;
@@ -113,10 +118,12 @@ function createRow(numBoxes) {
 // Function to create the entire grid
 function createGrid(numRows, numBoxesPerRow) {
     const table = document.getElementById("squaresTable");
-    table.appendChild(createFirstRow(numBoxesPerRow))
+    table.innerHTML = '';
+    const firstRow = createFirstRow(numBoxesPerRow);
+    table.appendChild(firstRow);
     for (let i = 0; i < numRows; i++) {
-        const rows = createRow(numBoxesPerRow);
-        table.appendChild(rows);
+        const row = createRow(numBoxesPerRow);
+        table.appendChild(row);
     }
 }
 
