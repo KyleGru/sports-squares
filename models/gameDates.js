@@ -11,7 +11,7 @@ GameDates.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    date: {
+    sportdate: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
