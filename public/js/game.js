@@ -182,12 +182,17 @@ function selectGame(data) {
 
 
 function startGame() {
-    setTimeout(() => {
-            const questionBox = document.querySelector('.question-box');
+    const questionBox = document.querySelectorAll('.question-box');
+    let i = 0
+    const numGenerator = setInterval(() => {
+            
             const randomNumber = Math.floor(Math.random() * 9) + 1;
-            questionBox.textContent = randomNumber;
-        
-    }, 5000);
+            questionBox[i].textContent = randomNumber;
+            i++
+            if (i > 19) {
+                clearInterval (numGenerator);
+            }
+    }, 50);
 }
 
 startGame();

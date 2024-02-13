@@ -5,7 +5,9 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node server.js"
+		"start": "node server.js",
+		"dev": "nodemon server.js"
+		
 	},
 	"keywords": [],
 	"author": "Kyle Gruschow",
@@ -23,7 +25,8 @@
 		"handlebars": "^4.7.8",
 		"mysql2": "^3.9.1",
 		"nodemon": "^3.0.3",
-		"sequelize": "^6.36.0"
+		"sequelize": "^6.36.0",
+		"socket.io": "^4.7.4"
 	},
 	"Transform": "AWS::Serverless-2016-10-31"
 }
