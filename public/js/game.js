@@ -38,7 +38,7 @@ function getSportApi(scoreId) {
     fetch(requestUrl, {
        method: "POST",
        body: JSON.stringify({ 
-        date: currentTime 
+        sportdate: currentTime 
     }),
        headers: { 'Content-Type': 'application/json' }
     })
