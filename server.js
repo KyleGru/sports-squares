@@ -20,9 +20,7 @@ if (cluster.isPrimary) {
   const numCPUs = availableParallelism();
   // create one worker per available core
   for (let i = 0; i < numCPUs; i++) {
-    cluster.fork({
-      PORT: PORT + i,
-    });
+    cluster.fork();
   }
 
   // set up the adapter on the primary thread
