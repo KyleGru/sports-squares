@@ -139,7 +139,8 @@ function selectOpenBox() {
 }
 
 function handleClick(event) {
-    event.target.textContent = 'X'
+    let placeUsername = localStorage.getItem('username')
+    event.target.textContent = placeUsername
 }
 selectOpenBox();
 

@@ -37,6 +37,7 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector("#password-signup").value.trim();
 
   if (username && email && password) {
+    localStorage.setItem('username', username);
     const response = await fetch("/api/users", {
       method: "POST",
       body: JSON.stringify({ username, email, password }),
