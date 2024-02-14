@@ -77,6 +77,19 @@ h2 {
 }
 
 /* Game styling */
+.container {
+  display: flex;
+}
+
+.game-board {
+  flex-grow: 1; /* Occupy remaining space */
+}
+
+.chat-container {
+  width: 300px; /* Adjust width as needed */
+  margin-left: 20px; /* Adjust margin as needed */
+}
+
 .game-board {
     display: grid;
     grid-template-columns: repeat(11, 1fr); /* 10 columns for digits 0-9 */

@@ -18,6 +18,7 @@ const loginFormHandler = async (event) => {
       console.log(await response.json());
       document.location.replace("/homepage");
     } else {
+      console.log(response.json())
       alert(response.statusText);
     }
   }
@@ -28,6 +29,7 @@ document
   .addEventListener("submit", loginFormHandler);
 
 const signupFormHandler = async (event) => {
+  console.log("before prevent")
   event.preventDefault();
 
   const username = document.querySelector("#username-signup").value.trim();
@@ -50,5 +52,8 @@ const signupFormHandler = async (event) => {
 };
 
 document
-  .querySelector(".signup-form")
-  .addEventListener("signup", signupFormHandler);
+  .querySelector(".signup-btn")
+  .addEventListener("click", signupFormHandler);
+  
+
+
