@@ -142,4 +142,4 @@ sequelize.sync({ force: false }).then(() => {
   });
 })};
 
-main();
+// main();
