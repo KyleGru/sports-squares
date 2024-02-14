@@ -15,18 +15,18 @@ const sequelize = require("./config/connection");
 const path = require("path");
 const cors = require("cors");
 
-if (cluster.isPrimary) {
-  const numCPUs = availableParallelism();
-  // create one worker per available core
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork({
-      PORT: 3001 + i,
-    });
-  }
+// if (cluster.isPrimary) {
+//   const numCPUs = availableParallelism();
+//   // create one worker per available core
+//   for (let i = 0; i < numCPUs; i++) {
+//     cluster.fork({
+//       PORT: 3001 + i,
+//     });
+//   }
 
-  // set up the adapter on the primary thread
-  return setupPrimary();
-}
+//   // set up the adapter on the primary thread
+//   return setupPrimary();
+// }
 
 async function main() {
   // open the database file
