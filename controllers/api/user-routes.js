@@ -32,6 +32,7 @@ router.post("/", async (req, res) => {
 
 //Login
 router.post("/login", async (req, res) => {
+  console.log(req.body)
   console.log("connected");
   try {
     const dbUserData = await User.findOne({
@@ -43,8 +44,8 @@ router.post("/login", async (req, res) => {
 
     if (!dbUserData) {
       res
-        .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
+        .status(404)
+        .json({ message: "User not found" });
       return;
     }
 
@@ -76,14 +77,34 @@ router.post("/login", async (req, res) => {
 });
 
 // Logout
+// router.post("/logout", (req, res) => {
+//   if (req.session.loggedIn) {
+//     req.session.destroy(() => {
+//       res.redirect('/login');
+//       res.status(204).end();
+//     });
+//   } else {
+//     res.status(404).end();
+//     res.render('login')
+//   }
+  
+// });
+
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).end();
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        res.status(500).end();
+        return;
+      }
+      res.redirect('/login');
     });
   } else {
     res.status(404).end();
+    res.render('login');
   }
 });
+
 
 module.exports = router;
