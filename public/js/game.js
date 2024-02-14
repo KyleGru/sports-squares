@@ -38,7 +38,7 @@ function getSportApi(scoreId) {
     fetch(requestUrl, {
        method: "POST",
        body: JSON.stringify({ 
-        date: currentTime 
+        sportdate: currentTime 
     }),
        headers: { 'Content-Type': 'application/json' }
     })
@@ -165,8 +165,8 @@ function selectGame(data) {
      console.log('Select Game', data)
     for(var i = 0; i < data.length; i++) {
         let choice = document.createElement('button')
-        choice.textContent = `${data[i].HomeTeam} vs ${data[i].AwayTeam}`
-        choice.style.cssText = 'list-style: none;'
+        choice.textContent += `${data[i].HomeTeam} vs ${data[i].AwayTeam}`
+        choice.style.cssText = 'list-style: none; margin: 2%;'
         gameChoice.appendChild(choice);
         localStorage.setItem(`${data[i].HomeTeam}&${data[i].AwayTeam}`, `${data[i].ScoreID}`);
         let keyData = `${data[i].HomeTeam}&${data[i].AwayTeam}`
