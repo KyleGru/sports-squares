@@ -4,26 +4,26 @@ const { join } = require("node:path");
 const { Server } = require("socket.io");
 const sqlite3 = require("sqlite3");
 const { open } = require("sqlite");
-const { availableParallelism } = require('node:os');
-const cluster = require('node:cluster');
-const { createAdapter, setupPrimary } = require('@socket.io/cluster-adapter');
+const { availableParallelism } = require("node:os");
+const cluster = require("node:cluster");
+const { createAdapter, setupPrimary } = require("@socket.io/cluster-adapter");
 const exphbs = require("express-handlebars");
 const hbs = exphbs.create({ helpers: require("./utils/helpers") });
 // Activate when controllers are added.
 const routes = require("./controllers");
 const sequelize = require("./config/connection");
 const path = require("path");
-const cors = require('cors');
+const cors = require("cors");
 
 if (cluster.isPrimary) {
   const numCPUs = availableParallelism();
   // create one worker per available core
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork({
-      PORT: 3001 + i
+      PORT: 3001 + i,
     });
   }
-  
+
   // set up the adapter on the primary thread
   return setupPrimary();
 }
@@ -31,8 +31,8 @@ if (cluster.isPrimary) {
 async function main() {
   // open the database file
   const db = await open({
-    filename: 'chat.db',
-    driver: sqlite3.Database
+    filename: "chat.db",
+    driver: sqlite3.Database,
   });
 
   // create our 'messages' table (you can ignore the 'client_offset' column for now)
@@ -43,8 +43,7 @@ async function main() {
         content TEXT
     );
   `);
-
-
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -52,53 +51,57 @@ const PORT = process.env.PORT || 3001;
 const server = createServer(app);
 const io = new Server(server, {
   connectionStateRecovery: {},
-  adapter: createAdapter()
+  adapter: createAdapter(),
 });
 
-app.get('/', (req, res) => {
-  res.render('game');
+app.get("/", (req, res) => {
+  res.render("game");
 });
 
-io.on('connection', async (socket) => {
-  console.log('a user connected');
-  socket.on('chat message', async (msg, clientOffset, callback) => {
+io.on("connection", async (socket) => {
+  console.log("a user connected");
+  socket.on("chat message", async (msg, clientOffset, callback) => {
     let result;
-      try {
-        // store the message in the database
-        result = await db.run('INSERT INTO messages (content, client_offset) VALUES (?, ?)', msg, clientOffset);
-      } catch (e) {
-        if (e.errno === 19 /* SQLITE_CONSTRAINT */ ) {
-          // the message was already inserted, so we notify the client
-          callback();
-        } else {
-          // nothing to do, just let the client retry
-        }
-        return;
+    try {
+      // store the message in the database
+      result = await db.run(
+        "INSERT INTO messages (content, client_offset) VALUES (?, ?)",
+        msg,
+        clientOffset
+      );
+    } catch (e) {
+      if (e.errno === 19 /* SQLITE_CONSTRAINT */) {
+        // the message was already inserted, so we notify the client
+        callback();
+      } else {
+        // nothing to do, just let the client retry
       }
-      // include the offset with the message
-      io.emit('chat message', msg, result.lastID);
-      // acknowledge the event
-      callback();
+      return;
+    }
+    // include the offset with the message
+    io.emit("chat message", msg, result.lastID);
+    // acknowledge the event
+    callback();
   });
   if (!socket.recovered) {
     // if the connection state recovery was not successful
     try {
-      await db.each('SELECT id, content FROM messages WHERE id > ?',
+      await db.each(
+        "SELECT id, content FROM messages WHERE id > ?",
         [socket.handshake.auth.serverOffset || 0],
         (_err, row) => {
-          socket.emit('chat message', row.content, row.id);
+          socket.emit("chat message", row.content, row.id);
         }
-      )
+      );
     } catch (e) {
       // something went wrong
     }
   }
 });
 
-  // socket.on('disconnect', () => {
-  //   console.log('user disconnected');
-  // });
-
+// socket.on('disconnect', () => {
+//   console.log('user disconnected');
+// });
 
 const session = require("express-session");
 
@@ -126,12 +129,9 @@ app.use(session(sess));
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-
-
 
 // Activate when routes is created.
 app.use(routes);
@@ -140,6 +140,6 @@ sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, function () {
     console.log(`App listening on port ${PORT}!`);
   });
-})};
+});
 
 // main();
