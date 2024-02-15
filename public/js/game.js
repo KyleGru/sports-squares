@@ -134,6 +134,15 @@ function createGrid(numRows, numBoxesPerRow) {
 // Call the function to generate the grid with 10 rows and 11 boxes per row
 createGrid(10, 11);
 
+let changeUserBtn = document.querySelector('.changeUsernameBtn')
+
+function changeUsername() {
+let usernameForm = document.querySelector('.changeUsername')
+let usernameInput = usernameForm.value;
+localStorage.setItem('username', usernameInput)
+handleClick(usernameInput)
+}
+
 function selectOpenBox() {
     const openBoxes = document.querySelectorAll('.open-box');
     openBoxes.forEach((box => {
@@ -147,6 +156,7 @@ function handleClick(event) {
     event.target.textContent = placeUsername
     console.log(event.target);
 }
+
 selectOpenBox();
 
 function renderGameInfo(data) {
@@ -192,7 +202,7 @@ function startGame() {
     let i = 0
     const numGenerator = setInterval(() => {
             
-            const randomNumber = Math.floor(Math.random() * 9) + 1;
+            const randomNumber = Math.floor(Math.random() * 9);
             questionBox[i].textContent = randomNumber;
             i++
             if (i > 19) {
@@ -201,5 +211,18 @@ function startGame() {
     }, 50);
 }
 
-startGame();
+function clearNumbers() {
+    const questionBox = document.querySelectorAll('.question-box');
+    questionBox.forEach(box => {
+        box.textContent = '?';
+    });
+}
 
+document.getElementById('clearBtn').addEventListener('click', clearNumbers);
+document.getElementById('startBtn').addEventListener('click', startGame);
+
+
+changeUserBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    changeUsername();
+})
