@@ -218,6 +218,14 @@ function clearNumbers() {
     });
 }
 
+function clearOpen() {
+    const openBox = document.querySelectorAll('.open-box');
+    openBox.forEach(box => {
+        box.textContent = 'Open';
+    });
+}
+
+document.getElementById('clearOpenBtn').addEventListener('click', clearOpen);
 document.getElementById('clearBtn').addEventListener('click', clearNumbers);
 document.getElementById('startBtn').addEventListener('click', startGame);
 

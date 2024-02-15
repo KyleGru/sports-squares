@@ -81,14 +81,39 @@ h2 {
   display: flex;
 }
 
-.game-board {
-  flex-grow: 1; /* Occupy remaining space */
+.topLeftBtn {
+  background-color: rgb(238, 3, 39);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
-.chat-container {
-  width: 300px; /* Adjust width as needed */
-  margin-left: 20px; /* Adjust margin as needed */
+.topRightBtn {
+  background-color: rgb(238, 3, 39);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
+
+.game-board {
+  /* flex-grow: 1; Occupy remaining space */
+  display: grid;
+  grid-template-columns: repeat(11, 1fr); /* 10 columns for digits 0-9 */
+  grid-template-rows: repeat(11, 1fr); /* 10 rows for digits 0-9 */
+  gap: 5px; /* Gap between grid items */
+  margin: 0 auto; /* Center horizontally */
+  width: 80%; /* Set the width as needed */
+}
+
+
 
 .game-board {
     display: grid;
