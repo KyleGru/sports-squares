@@ -141,27 +141,23 @@ function createGrid(numRows, numBoxesPerRow) {
 // Call the function to generate the grid with 10 rows and 11 boxes per row
 createGrid(10, 11);
 
-let changeUserBtn = document.querySelector('.changeUsernameBtn')
-
-function changeUsername() {
-let usernameForm = document.querySelector('.changeUsername')
-let usernameInput = usernameForm.value;
-localStorage.setItem('username', usernameInput)
-handleClick(usernameInput)
+function clearSelectedOpenBoxes() {
+    const openBoxes = document.querySelectorAll('.open-box.selected');
+    openBoxes.forEach((box) => {
+        box.classList.remove('selected');
+    });
 }
 
 function selectOpenBox() {
     const openBoxes = document.querySelectorAll('.open-box');
-    openBoxes.forEach((box => {
-        box.addEventListener('click', handleClick);
-
-    }))
-}
-
-function handleClick(event) {
-    let placeUsername = localStorage.getItem('username')
-    event.target.textContent = placeUsername
-    console.log(event.target);
+    openBoxes.forEach((box) => {
+        box.addEventListener('click', (event) => {
+            const placeUsername = localStorage.getItem('username')
+            event.target.textContent = placeUsername
+            event.target.classList.toggle('selected')
+            console.log(event.target);
+        });
+    });
 }
 
 selectOpenBox();
@@ -259,12 +255,8 @@ function clearOpen() {
     });
 }
 
-document.getElementById('clearOpenBtn').addEventListener('click', clearOpen);
+document.getElementById('clearOpenBtn').addEventListener('click', clearOpen)
 document.getElementById('clearBtn').addEventListener('click', clearNumbers);
 document.getElementById('startBtn').addEventListener('click', startGame);
 
 
-changeUserBtn.addEventListener('click', function(event) {
-    event.preventDefault();
-    changeUsername();
-})
