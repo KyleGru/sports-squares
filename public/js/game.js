@@ -165,14 +165,18 @@ function renderGameInfo(data) {
     const quarter = document.querySelector(".quarter")
     const homeScore = document.querySelector(".homeScore")
     const awayScore = document.querySelector(".awayScore")
+    // const bigHomeTeam = document.querySelector('.bigHomeTeam')
+    // const bigAwayTeam = document.querySelector('.bigAwayTeam')
 
-    // data.Score.HomeTeam, 'Score:', data.Score.HomeScore
+    //*******************************************/
 
     homeTeam.textContent = `${data.Score.HomeTeam}`
     awayTeam.textContent = `${data.Score.AwayTeam}`
     quarter.textContent = `${data.Score.QuarterDescription}`
     homeScore.textContent = `${data.Score.HomeScore}`
     awayScore.textContent = `${data.Score.AwayScore}`
+    // bigHomeTeam.textContent = `${data.Score.HomeTeam}`
+    // bigAwayTeam.textContent = `${data.Score.AwayTeam}`
 }
 
 function selectGame(data) {
