@@ -102,7 +102,7 @@ router.post("/logout", (req, res) => {
     });
   } else {
     res.status(404).end();
-    res.render('login');
+    res.render('/login');
   }
 });
 

@@ -14,10 +14,9 @@
         <header class="hero">
             <div>
                 <nav class="nav">
-                    <a href="/signup">Sign Up</a>
                     {{#if loggedIn}}
                     <button id="logoutBtn" class="btn">Log Out</button>
-                    <button id="profile" class="btn">View Profile</button>
+                    <button id="profileBtn" class="btn">View Profile</button>
                     {{else}}
                     <a href="/login">Log In</a>
                     {{/if}}
@@ -32,7 +31,7 @@
     </div>
 
 {{#if loggedIn}}
-<script src=""></script>
+<script src="/js/logout.js"></script>
 {{/if}}
 </body>
 
