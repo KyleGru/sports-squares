@@ -12,7 +12,7 @@ Participants who have squares corresponding to the last digit of the scores for 
 
 ## Installation
 
-Download the Github repository. From there 
+Download the Github repository. From there do an npm install in the terminal and npm run start to get the server going on a port.
 
 ## Usage
 
