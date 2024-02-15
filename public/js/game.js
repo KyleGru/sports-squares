@@ -220,6 +220,7 @@ function renderGameInfo(data) {
 
 function selectGame(data) {
     const gameChoice = document.querySelector(".gameChoices")
+    gameChoice.classList.add('scoreBtnDiv')
     
      console.log('Select Game', data)
     for(var i = 0; i < data.length; i++) {
@@ -232,12 +233,15 @@ function selectGame(data) {
         border: black solid 2px;
         border-radius: 3px;
         cursor: pointer;
-        margin-bottom: 10px;`
+        margin-bottom: 10px;
+      `
         gameChoice.appendChild(choice);
         localStorage.setItem(`${data[i].HomeTeam}&${data[i].AwayTeam}`, `${data[i].ScoreID}`);
         let keyData = `${data[i].HomeTeam}&${data[i].AwayTeam}`
 
         choice.onclick = function() {
+            gameChoice.classList.add('hide')
+            gameChoice.classList.remove('scoreBtnDiv')
             console.log('click', keyData)
             let scoreId = localStorage.getItem(keyData);
              fetchById(scoreId);
