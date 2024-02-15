@@ -203,7 +203,7 @@ function selectGame(data) {
         color: #fff;
         padding: 5px 5px;
         font-size: 16px;
-        border: black solid;
+        border: black solid 2px;
         border-radius: 3px;
         cursor: pointer;
         margin-bottom: 10px;`

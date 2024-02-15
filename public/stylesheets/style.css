@@ -166,14 +166,19 @@ h2 {
   }
 
 
-  .gameBtns {
-    background-color: rgb(238, 3, 39);
-    color: #fff;
-    padding: 10px 10px;
-    font-size: 16px;
-    border: black solid;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-bottom: 10px;
+  .changeInput {
+    font-size: 13pt;
+    margin-top: 2%;
+    border: solid red 2px;
+    border-radius: 5px 5px 5px 5px;
   }
   
+  .btn-submit {
+    background-color: rgb(238, 3, 39);
+    color: #fff;
+    padding: 5px 13px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
