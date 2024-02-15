@@ -164,5 +164,21 @@ h2 {
     border: 1px solid black; /* Add borders to cells for visual clarity */
     text-align: center; /* Center-align content in cells */
   }
+
+
+  .changeInput {
+    font-size: 13pt;
+    margin-top: 2%;
+    border: solid red 2px;
+    border-radius: 5px 5px 5px 5px;
+  }
   
-  
+  .btn-submit {
+    background-color: rgb(238, 3, 39);
+    color: #fff;
+    padding: 5px 13px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

@@ -1,8 +1,8 @@
-<div class="card mx-auto" style="max-width: 730px;">
+<div class="card mx-auto" style="max-width: 730px; font-family:Verdana, Geneva, Tahoma, sans-serif">
   <div class="card-header has-background-dark py-2">
 <div>
-  <input type="text" class="changeUsername">
-  <button type="submit" class="changeUsernameBtn">submit</button>
+  <input type="text" class="changeUsername changeInput" placeholder="Enter Username">
+  <button type="submit" class="changeUsernameBtn btn-submit">submit</button>
 </div>
     <h4 class="mb-0 has-text-centered has-text-white">Your Squares Game</h4>
     <div>
@@ -12,13 +12,14 @@
       </div>
     </div>
 
-    <div class="gameInfo" style="display: flex; justify-content: center; gap: 20%;">
+    <div class="gameInfo">
       <div>
         <h5 class="homeTeam"></h5>
         <p class="homeScore"></p>
       </div>
       <div>
         <h5 class="quarter"></h5>
+        <h5 class="gamePlay"></h5>
       </div>
       <div>
         <h5 class="awayTeam"></h5>
@@ -36,8 +37,9 @@
       </div>
     </div>
   </div>
+ 
 
-  <div class="container">
+  <div class="container" style="position: relative;">
     <div class="card">
 <div class="container">
   <div class="card">
@@ -49,6 +51,7 @@
     </div>
     <div class="chat-container">
       <div class="card">
+         
 
         <head>
           <title>Socket.IO chat</title>
@@ -118,6 +121,33 @@
         </body>
       </div>
     </div>
+  </div>
+  <div class="bigHomeTeam" style="font-size: 40px; position: absolute; top: 5%; left: -21%;"></div>
+  <div class="bigAwayTeam" style="font-size: 40px; position: absolute; top: -1.75%; left: 45%;"></div>
+  <div class="scoreCard" style="font-size: 50px; position: absolute;top: 10%; left: 30%;">
+    Score Board
+     <div style="display: flex; font-size: 18px; gap: 4%; justify-content: center;">
+      <div>
+        <div>Q1</div>
+           <div contenteditable="true">Winner</div>
+           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
+      </div>
+      <div>
+        <div>Q2</div>
+           <div contenteditable="true">Winner</div>
+           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
+      </div>
+      <div>
+        <div>Q3</div>
+           <div contenteditable="true">Winner</div>
+           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
+      </div>
+      <div><div>Q4</div>
+           <div contenteditable="true">Winner</div>
+           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
+           </div>
+      </div>
+     </div>
   </div>
 
   <script src="/js/game.js"></script>
