@@ -107,9 +107,6 @@ function createFirstRow(questionBoxes) {
 }
 // Function to create a single row with question mark box followed by "Open" boxes
 function createRow(numBoxes) {
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-      }
     const row = document.createElement('tr');
     for (let i = 0; i < numBoxes; i++) {
         const cell = document.createElement('td');
@@ -119,7 +116,6 @@ function createRow(numBoxes) {
         } else {
             cell.textContent = 'Open';
             cell.classList.add('open-box');
-            cell.classList.add(`${getRandomInt(800)}`)
         }
         row.appendChild(cell);
     }
@@ -140,6 +136,20 @@ function createGrid(numRows, numBoxesPerRow) {
 
 // Call the function to generate the grid with 10 rows and 11 boxes per row
 createGrid(10, 11);
+
+let changeUserBtn = document.querySelector('.changeUsernameBtn')
+
+function changeUsername() {
+let usernameForm = document.querySelector('.changeUsername')
+let usernameInput = usernameForm.value;
+localStorage.setItem('username', usernameInput)
+handleClick(usernameInput)
+}
+
+function handleClick(event) {
+    let placeUsername = localStorage.getItem('username')
+    event.target.textContent = placeUsername
+}
 
 function clearSelectedOpenBoxes() {
     const openBoxes = document.querySelectorAll('.open-box.selected');
@@ -259,4 +269,7 @@ document.getElementById('clearOpenBtn').addEventListener('click', clearOpen)
 document.getElementById('clearBtn').addEventListener('click', clearNumbers);
 document.getElementById('startBtn').addEventListener('click', startGame);
 
-
+changeUserBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    changeUsername();
+})
