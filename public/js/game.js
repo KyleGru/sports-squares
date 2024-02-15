@@ -165,6 +165,10 @@ function renderGameInfo(data) {
     const quarter = document.querySelector(".quarter")
     const homeScore = document.querySelector(".homeScore")
     const awayScore = document.querySelector(".awayScore")
+    const gameInfo = document.querySelector('.gameInfo')
+    const bigHome = document.querySelector('.bigHomeTeam')
+    const bigAway = document.querySelector('.bigAwayTeam')
+    const gamePlay = document.querySelector('.gamePlay')
 
     // data.Score.HomeTeam, 'Score:', data.Score.HomeScore
 
@@ -173,6 +177,19 @@ function renderGameInfo(data) {
     quarter.textContent = `${data.Score.QuarterDescription}`
     homeScore.textContent = `${data.Score.HomeScore}`
     awayScore.textContent = `${data.Score.AwayScore}`
+    bigHome.textContent = `${data.Score.HomeTeam}`
+    bigAway.textContent = `${data.Score.AwayTeam}`
+    gamePlay.textContent = `${data.Score.DownAndDistance}`
+
+    if (data.Score.HomeTeam === data.Score.Possession) {
+        homeTeam.style.cssText = 'color: rgb(24, 143, 24);'
+        awayTeam.style.cssText = 'color: black;'
+    } else if (data.Score.AwayTeam === data.Score.Possession) {
+        awayTeam.style.cssText = 'color: rgb(24, 143, 24);'
+        homeTeam.style.cssText = 'color: black;'
+    }
+
+  gameInfo.style.cssText = 'margin-bottom: 15%; display: flex; justify-content: center; gap: 20%;'
 }
 
 function selectGame(data) {
@@ -182,7 +199,14 @@ function selectGame(data) {
     for(var i = 0; i < data.length; i++) {
         let choice = document.createElement('button')
         choice.textContent += `${data[i].HomeTeam} vs ${data[i].AwayTeam}`
-        choice.style.cssText = 'list-style: none; margin: 2%;'
+        choice.style.cssText = `list-style: none; margin: 2% ; background-color: rgb(238, 3, 39);
+        color: #fff;
+        padding: 5px 5px;
+        font-size: 16px;
+        border: black solid;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-bottom: 10px;`
         gameChoice.appendChild(choice);
         localStorage.setItem(`${data[i].HomeTeam}&${data[i].AwayTeam}`, `${data[i].ScoreID}`);
         let keyData = `${data[i].HomeTeam}&${data[i].AwayTeam}`
