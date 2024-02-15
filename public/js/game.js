@@ -16,6 +16,13 @@ function getSportApi(scoreId) {
       });
   }
 
+  function refreshFetch(scoreId) {
+    setTimeout(() => {
+        console.log('Refresh ID', scoreId);
+       getSportApi(scoreId)
+    }, 30000)
+  }
+
   function fetchById(scoreId) {
     let requestUrl = `/api/sportFetch`;
     console.log('scoreID', scoreId)
@@ -190,6 +197,9 @@ function renderGameInfo(data) {
     }
 
   gameInfo.style.cssText = 'margin-bottom: 15%; display: flex; justify-content: center; gap: 20%;'
+
+  let scoreId = data.Score.ScoreID
+  refreshFetch(scoreId)
 }
 
 function selectGame(data) {
