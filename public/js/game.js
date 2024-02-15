@@ -165,7 +165,6 @@ function selectOpenBox() {
             const placeUsername = localStorage.getItem('username')
             event.target.textContent = placeUsername
             event.target.classList.toggle('selected')
-            console.log(event.target);
         });
     });
 }
@@ -262,6 +261,7 @@ function clearOpen() {
     const openBox = document.querySelectorAll('.open-box');
     openBox.forEach(box => {
         box.textContent = 'Open';
+        box.classList.remove('selected')
     });
 }
 
