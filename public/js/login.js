@@ -55,4 +55,8 @@ document
   .querySelector(".signup-btn")
   .addEventListener("click", signupFormHandler);
 
+switchUsernameBox
+  
+
+
 
