@@ -100,6 +100,9 @@ function createFirstRow(questionBoxes) {
 }
 // Function to create a single row with question mark box followed by "Open" boxes
 function createRow(numBoxes) {
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
     const row = document.createElement('tr');
     for (let i = 0; i < numBoxes; i++) {
         const cell = document.createElement('td');
@@ -109,6 +112,7 @@ function createRow(numBoxes) {
         } else {
             cell.textContent = 'Open';
             cell.classList.add('open-box');
+            cell.classList.add(`${getRandomInt(800)}`)
         }
         row.appendChild(cell);
     }
@@ -139,7 +143,9 @@ function selectOpenBox() {
 }
 
 function handleClick(event) {
-    event.target.textContent = 'X'
+    let placeUsername = localStorage.getItem('username')
+    event.target.textContent = placeUsername
+    console.log(event.target);
 }
 selectOpenBox();
 
