@@ -152,6 +152,11 @@ h2 {
     font-weight: 100;
     background-color: azure;
   }
+
+  .selected {
+    background-color: rgba(0, 0, 0, 0.771);
+    color:rgb(238, 3, 39);
+  }
   
  /* CSS styles for the game board layout */
 #squaresTable {

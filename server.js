@@ -53,7 +53,7 @@ async function main() {
 
   app.get("/", (req, res) => {
     res.sendFile(join(__dirname, 'views'));
-    res.render("game");
+    res.render("login");
   });
 
   io.on("connection", async (socket) => {
