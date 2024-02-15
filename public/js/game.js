@@ -183,7 +183,16 @@ function renderGameInfo(data) {
     const gamePlay = document.querySelector('.gamePlay')
 
     // data.Score.HomeTeam, 'Score:', data.Score.HomeScore
-
+     if (data.Score.IsInProgress === false) {
+        homeTeam.textContent = `${data.Score.HomeTeam}`
+    awayTeam.textContent = `${data.Score.AwayTeam}`
+    bigHome.textContent = `${data.Score.HomeTeam}`
+    bigAway.textContent = `${data.Score.AwayTeam}`
+    quarter.textContent =  `TBD`
+    homeScore.textContent =  `TBD`
+    awayScore.textContent =  `TBD`
+    gamePlay.textContent = ` `
+     } else {
     homeTeam.textContent = `${data.Score.HomeTeam}`
     awayTeam.textContent = `${data.Score.AwayTeam}`
     quarter.textContent = `${data.Score.QuarterDescription}`
@@ -192,6 +201,8 @@ function renderGameInfo(data) {
     bigHome.textContent = `${data.Score.HomeTeam}`
     bigAway.textContent = `${data.Score.AwayTeam}`
     gamePlay.textContent = `${data.Score.DownAndDistance}`
+     }
+     
 
     if (data.Score.HomeTeam === data.Score.Possession) {
         homeTeam.style.cssText = 'color: rgb(24, 143, 24);'
