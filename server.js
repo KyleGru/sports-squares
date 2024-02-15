@@ -52,6 +52,7 @@ async function main() {
   });
 
   app.get("/", (req, res) => {
+    res.sendFile(join(__dirname, 'views'));
     res.render("game");
   });
 
