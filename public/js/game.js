@@ -195,7 +195,7 @@ function renderGameInfo(data) {
     quarter.textContent =  `TBD`
     homeScore.textContent =  `TBD`
     awayScore.textContent =  `TBD`
-    gamePlay.textContent = ` `
+    
      } else {
     homeTeam.textContent = `${data.Score.HomeTeam}`
     awayTeam.textContent = `${data.Score.AwayTeam}`
@@ -204,7 +204,13 @@ function renderGameInfo(data) {
     awayScore.textContent = `${data.Score.AwayScore}`
     bigHome.textContent = `${data.Score.HomeTeam}`
     bigAway.textContent = `${data.Score.AwayTeam}`
-    gamePlay.textContent = `${data.Score.DownAndDistance}`
+    
+     }
+
+     if (data.Score.DownAndDistance == null) {
+        gamePlay.textContent = ` `
+     } else {
+        gamePlay.textContent = `${data.Score.DownAndDistance}`
      }
      
 
@@ -216,6 +222,14 @@ function renderGameInfo(data) {
         homeTeam.style.cssText = 'color: black;'
     }
 
+    //sum scores
+    const Q2HomeScore = data.Score.HomeScoreQuarter1 + data.Score.HomeScoreQuarter2;
+    const Q2AwayScore = data.Score.AwayScoreQuarter1 + data.Score.AwayScoreQuarter2;
+    const Q3HomeScore = Q2HomeScore + data.Score.HomeScoreQuarter3;
+    const Q3AwayScore = Q2AwayScore + data.Score.AwayScoreQuarter3;
+    const Q4HomeScore = Q3HomeScore + data.Score.HomeScoreQuarter4;
+    const Q4AwayScore = Q3AwayScore + data.Score.AwayScoreQuarter4
+
     if (data.Score.Has1stQuarterStarted === true) {
         Q1.textContent = `${data.Score.HomeTeam}: ${data.Score.HomeScoreQuarter1}|${data.Score.AwayTeam}: ${data.Score.AwayScoreQuarter1}`
         Q1.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
@@ -225,7 +239,7 @@ function renderGameInfo(data) {
     }
 
     if (data.Score.Has2ndQuarterStarted === true) {
-        Q2.textContent = `${data.Score.HomeTeam}: ${data.Score.HomeScoreQuarter2}|${data.Score.AwayTeam}: ${data.Score.AwayScoreQuarter2}`
+        Q2.textContent = `${data.Score.HomeTeam}: ${Q2HomeScore}|${data.Score.AwayTeam}: ${Q2AwayScore}`
         Q2.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
     } else {
         Q2.textContent = 'TBD'
@@ -233,7 +247,7 @@ function renderGameInfo(data) {
     }
 
     if (data.Score.Has3rdQuarterStarted === true) {
-        Q3.textContent = `${data.Score.HomeTeam}: ${data.Score.HomeScoreQuarter3}|${data.Score.AwayTeam}: ${data.Score.AwayScoreQuarter3}`
+        Q3.textContent = `${data.Score.HomeTeam}: ${Q3HomeScore}|${data.Score.AwayTeam}: ${Q3AwayScore}`
         Q3.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
     } else {
         Q3.textContent = 'TBD'
@@ -241,7 +255,7 @@ function renderGameInfo(data) {
     }
 
     if (data.Score.Has4thQuarterStarted === true) {
-        Q4.textContent = `${data.Score.HomeTeam}: ${data.Score.HomeScoreQuarter4}|${data.Score.AwayTeam}: ${data.Score.AwayScoreQuarter4}`
+        Q4.textContent = `${data.Score.HomeTeam}: ${Q4HomeScore}|${data.Score.AwayTeam}: ${Q4AwayScore}`
         Q4.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
     } else {
         Q4.textContent = 'TBD'
