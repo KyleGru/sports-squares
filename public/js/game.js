@@ -181,6 +181,10 @@ function renderGameInfo(data) {
     const bigHome = document.querySelector('.bigHomeTeam')
     const bigAway = document.querySelector('.bigAwayTeam')
     const gamePlay = document.querySelector('.gamePlay')
+    const Q1 = document.querySelector('.Q1Win')
+    const Q2 = document.querySelector('.Q2Win')
+    const Q3 = document.querySelector('.Q3Win')
+    const Q4 = document.querySelector('.Q4Win')
 
     // data.Score.HomeTeam, 'Score:', data.Score.HomeScore
      if (data.Score.IsInProgress === false) {
@@ -210,6 +214,38 @@ function renderGameInfo(data) {
     } else if (data.Score.AwayTeam === data.Score.Possession) {
         awayTeam.style.cssText = 'color: rgb(24, 143, 24);'
         homeTeam.style.cssText = 'color: black;'
+    }
+
+    if (data.Score.Has1stQuarterStarted === true) {
+        Q1.textContent = `${data.Score.HomeTeam}: ${data.Score.HomeScoreQuarter1}|${data.Score.AwayTeam}: ${data.Score.AwayScoreQuarter1}`
+        Q1.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
+    } else {
+        Q1.textContent = 'TBD'
+        Q1.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
+    }
+
+    if (data.Score.Has2ndQuarterStarted === true) {
+        Q2.textContent = `${data.Score.HomeTeam}: ${data.Score.HomeScoreQuarter2}|${data.Score.AwayTeam}: ${data.Score.AwayScoreQuarter2}`
+        Q2.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
+    } else {
+        Q2.textContent = 'TBD'
+        Q2.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
+    }
+
+    if (data.Score.Has3rdQuarterStarted === true) {
+        Q3.textContent = `${data.Score.HomeTeam}: ${data.Score.HomeScoreQuarter3}|${data.Score.AwayTeam}: ${data.Score.AwayScoreQuarter3}`
+        Q3.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
+    } else {
+        Q3.textContent = 'TBD'
+        Q3.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
+    }
+
+    if (data.Score.Has4thQuarterStarted === true) {
+        Q4.textContent = `${data.Score.HomeTeam}: ${data.Score.HomeScoreQuarter4}|${data.Score.AwayTeam}: ${data.Score.AwayScoreQuarter4}`
+        Q4.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
+    } else {
+        Q4.textContent = 'TBD'
+        Q4.style.cssText = 'font-size: 8pt; margin-top: 10%; margin-bottom: 5%;'
     }
 
   gameInfo.style.cssText = 'margin-bottom: 15%; display: flex; justify-content: center; gap: 20%;'
