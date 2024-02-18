@@ -13,6 +13,7 @@ function getSportApi(scoreId) {
        console.log(data.Score.AwayTeam, 'Score:', data.Score.AwayScore);
        console.log(data.Score.HomeTeam, 'Score:', data.Score.HomeScore);
        renderGameInfo(data)
+       selectWinner(data);
       });
   }
 
@@ -187,7 +188,7 @@ function renderGameInfo(data) {
     const Q4 = document.querySelector('.Q4Win')
 
     // data.Score.HomeTeam, 'Score:', data.Score.HomeScore
-     if (data.Score.IsInProgress === false) {
+     if (data.Score.IsInProgress === false && data.Score.Has1stQuarterStarted === false) {
         homeTeam.textContent = `${data.Score.HomeTeam}`
     awayTeam.textContent = `${data.Score.AwayTeam}`
     bigHome.textContent = `${data.Score.HomeTeam}`
@@ -306,7 +307,7 @@ function startGame() {
     let i = 0
     const numGenerator = setInterval(() => {
             
-            const randomNumber = Math.floor(Math.random() * 9);
+            const randomNumber = Math.floor(Math.random() * 10);
             questionBox[i].textContent = randomNumber;
             i++
             if (i > 19) {
@@ -339,4 +340,81 @@ changeUserBtn.addEventListener('click', function(event) {
     changeUsername();
 })
 
+function selectWinner(data) {
+    let winnerArray = []
+    let homeData = JSON.stringify(data.Score.HomeScore);
+    let awayData = JSON.stringify(data.Score.AwayScore);
+    let isGameStarted = data.Score.HasStarted
 
+    if (isGameStarted === true) {
+        const scoreObject = {
+            homeSquareNum: homeData.charAt(homeData.length-1),
+            awaySquareNum: awayData.charAt(awayData.length-1)
+        }
+        winnerArray.push(scoreObject);
+        console.log('win array', winnerArray)
+        console.log('home score parse', homeData.length)
+        console.log('away score parse', awayData.length)
+
+        highlightRedSquares(winnerArray);
+    }
+}
+
+function highlightRedSquares(winnerArray) {
+    let homeArray = []
+    let awayArray = []
+    let redSquares = document.querySelectorAll('.question-box')
+
+    redSquares.forEach((num) => awayArray.push(num));
+    console.log(awayArray);
+    let homeSplice =  awayArray.splice(0, 10)
+    homeArray.push(homeSplice)
+    console.log('homeArray', homeArray);
+
+    console.log('away compare', winnerArray[0].awaySquareNum);
+    console.log('Home Array: ', homeArray[0][1].innerHTML)
+    /// TBD loop through array to compare red square nums to the winning nums and change the background of childeren name squares to gold vertically.
+    for (var i = 0; i < awayArray.length; i++) {
+        if (winnerArray[0].awaySquareNum === awayArray[i].innerHTML) {
+           let winningAwaySquare = awayArray[i]
+           let parent = winningAwaySquare.parentNode
+           console.log(parent)
+           let children = parent.children
+           console.log(children)
+           goldColumns(children)
+        }
+    }
+    console.log('Home Score', winnerArray[0].homeSquareNum)
+    homeArray = homeArray[0]
+    console.log('new home array', homeArray)
+    for (var s = 0; s < homeArray.length; s++) {
+       if (winnerArray[0].homeSquareNum === homeArray[s].innerHTML) {
+         let winningHomeSquare = homeArray[s]
+         console.log('Loop Text', winningHomeSquare)
+           winningHomeSquare.classList.add('highlightWinner')
+           console.log('i: ', s)
+           goldSquares(s)
+       }
+    }
+
+    function goldColumns (children) {
+        for (var i=0; i < children.length; i++) {
+            let oneSquare = children[i]
+            oneSquare.classList.add('highlightWinner')
+        }
+        // for (var i = 0; i < awayArray.length; i++) {
+        //     let arrayAwaySquare = awayArray[i]
+        //     arrayAwaySquare.style.cssText = ``
+        // }   
+    }
+    function goldSquares (s) {
+        var style = document.createElement('style');
+  document.body.appendChild(style);
+  style.sheet.insertRule(`td:nth-child(${s+2}) {background-color: goldenrod;}`);
+          console.log('gs', s)
+    }
+}
+
+
+// let timeData = data.CurrentTime;
+//        let currentTime = timeData.substr(0, 10)

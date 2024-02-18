@@ -199,3 +199,9 @@ h2 {
     gap: 5%; 
     justify-content: center;
   }
+
+  .highlightWinner {
+    background-color: goldenrod;
+  }
+
+  /* td:nth-child(2) {background-color: blue;} */
