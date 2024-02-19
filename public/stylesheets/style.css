@@ -204,4 +204,8 @@ h2 {
     background-color: goldenrod;
   }
 
+  .winningSquare {
+    background-color: green;
+  }
+
   /* td:nth-child(2) {background-color: blue;} */

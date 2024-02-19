@@ -387,34 +387,50 @@ function highlightRedSquares(winnerArray) {
     console.log('Home Score', winnerArray[0].homeSquareNum)
     homeArray = homeArray[0]
     console.log('new home array', homeArray)
-    for (var s = 0; s < homeArray.length; s++) {
-       if (winnerArray[0].homeSquareNum === homeArray[s].innerHTML) {
-         let winningHomeSquare = homeArray[s]
-         console.log('Loop Text', winningHomeSquare)
-           winningHomeSquare.classList.add('highlightWinner')
-           console.log('i: ', s)
-           goldSquares(s)
-       }
-    }
+
+    setTimeout(() => {
+        for (var s = 0; s < homeArray.length; s++) {
+            if (winnerArray[0].homeSquareNum === homeArray[s].innerHTML) {
+              let winningHomeSquare = homeArray[s]
+              console.log('Loop Text', winningHomeSquare)
+                winningHomeSquare.classList.add('highlightWinner')
+                console.log('i: ', s)
+                goldSquares(s, awayArray)
+            }
+         }
+    }, 1000)
+    
 
     function goldColumns (children) {
         for (var i=0; i < children.length; i++) {
             let oneSquare = children[i]
             oneSquare.classList.add('highlightWinner')
         }
-        // for (var i = 0; i < awayArray.length; i++) {
-        //     let arrayAwaySquare = awayArray[i]
-        //     arrayAwaySquare.style.cssText = ``
-        // }   
     }
-    function goldSquares (s) {
-        var style = document.createElement('style');
-  document.body.appendChild(style);
-  style.sheet.insertRule(`td:nth-child(${s+2}) {background-color: goldenrod;}`);
-          console.log('gs', s)
-    }
+//     function goldSquares (s) {
+//         var style = document.createElement('style');
+//   document.body.appendChild(style);
+//   style.sheet.insertRule(`td:nth-child(${s+2}) {background-color: goldenrod;}`);
+//           console.log('gs', s)
+//     }
+
+function goldSquares (s, awayArray) {
+  console.log('away', awayArray)
+  console.log('s', s)
+  for (var i=0; i < awayArray.length; i++) {
+    let winningAwaySquare = awayArray[i]
+    let parent = winningAwaySquare.parentNode
+    let child = parent.childNodes[s+1]
+           if (child.classList.contains('highlightWinner') === false) {
+            console.log(parent.classList.contains('highlightWinner'))
+             child.classList.add('highlightWinner')
+           } else if (child.classList.contains('highlightWinner') === true) {
+            console.log(parent.classList.contains('highlightWinner'))
+            child.classList.add('winningSquare')
+           }
+  }
+}
+
 }
 
 
-// let timeData = data.CurrentTime;
-//        let currentTime = timeData.substr(0, 10)
