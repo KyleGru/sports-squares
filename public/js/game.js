@@ -18,6 +18,7 @@ function getSportApi(scoreId) {
 
 function refreshFetch(scoreId) {
   setTimeout(() => {
+    officialWins = []
     console.log("Refresh ID", scoreId);
     getSportApi(scoreId);
   }, 30000);
@@ -357,11 +358,11 @@ function selectWinner(data) {
     console.log("home score parse", homeData.length);
     console.log("away score parse", awayData.length);
 
-    highlightRedSquares(winnerArray);
+    highlightRedSquares(winnerArray, data);
   }
 }
 
-function highlightRedSquares(winnerArray) {
+function highlightRedSquares(winnerArray, data) {
   let homeArray = [];
   let awayArray = [];
   let redSquares = document.querySelectorAll(".question-box");
@@ -387,7 +388,7 @@ function highlightRedSquares(winnerArray) {
       goldColumns(children);
     }
   }
-  
+
   console.log("Home Score", winnerArray[0].homeSquareNum);
   homeArray = homeArray[0];
   console.log("new home array", homeArray);
@@ -430,5 +431,63 @@ function highlightRedSquares(winnerArray) {
         child.classList.add("winningSquare");
       }
     }
+    recordWinner(data);
   }
 }
+
+let officialWins = []
+
+function recordWinner(data) {
+    console.log('DATA', data);
+    
+    let allTD = document.querySelectorAll('td')
+    allTD.forEach((sq) => {
+       if(sq.classList.contains('winningSquare') === true) {
+        console.log('*** WINNER ****: ', sq.textContent)
+        officialWins.push(sq.textContent)
+       }
+    })
+    if (officialWins.length > 0 ) {
+    officialWins.sort()
+    for (var i=0; i < officialWins.length; i++) {
+        if (officialWins[i] === officialWins[i+1]) {
+            officialWins.pop(officialWins[i])
+            console.log(officialWins)
+            winnerScoreBoard(officialWins, data)
+        }
+    }
+  }
+}
+
+function winnerScoreBoard(officialWins, data) {
+    let q1Winner = document.querySelector('.q1Winner')
+    let q2Winner = document.querySelector('.q2Winner')
+    let q3Winner = document.querySelector('.q3Winner')
+    let q4Winner = document.querySelector('.q4Winner')
+
+    q1Winner.innerHTML = '🏆'
+    q2Winner.textContent = 'TBD'
+    q3Winner.innerHTML = 'tbd'
+    q4Winner.innerHTML = 'tbd'
+
+    console.log('DATA 2:', data)
+   for (var i = 0; i < officialWins.length; i++) {
+      if(data.Score.Has1stQuarterStarted === true && data.Score.Has2ndQuarterStarted === false) {
+        
+        q1Winner.innerHTML += officialWins[i]
+      } else if (data.Score.Has2ndQuarterStarted === true && data.Score.Has3rdQuarterStarted === false){
+        
+        q2Winner.innerHTML += officialWins[i]
+      } else if (data.Score.Has3rdQuarterStarted === true && data.Score.Has4thQuarterStarted === false) {
+        
+        q3Winner.innerHTML += officialWins[i]
+      } else if (data.Score.Has4thQuarterStarted === true) {
+        
+        q4Winner.innerHTML += officialWins[i]
+        console.log('4th', officialWins[i])
+      } else {
+        return;
+      }
+   }
+}
+
