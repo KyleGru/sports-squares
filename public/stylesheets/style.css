@@ -209,3 +209,13 @@ h2 {
     gap: 5%; 
     justify-content: center;
   }
+
+  .highlightWinner {
+    background-color: goldenrod;
+  }
+
+  .winningSquare {
+    background-color: green;
+  }
+
+  /* td:nth-child(2) {background-color: blue;} */
