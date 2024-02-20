@@ -447,16 +447,19 @@ function recordWinner(data) {
         officialWins.push(sq.textContent)
        }
     })
-    if (officialWins.length > 0 ) {
-    officialWins.sort()
+    console.log('Array Length: ', officialWins.length)
+    if (officialWins.length <= 1 ) {
+    winnerScoreBoard(officialWins, data);
+  } else {
+  officialWins.sort()
     for (var i=0; i < officialWins.length; i++) {
         if (officialWins[i] === officialWins[i+1]) {
-            officialWins.pop(officialWins[i])
+            console.log(officialWins.splice(i, i))
             console.log(officialWins)
             winnerScoreBoard(officialWins, data)
         }
     }
-  }
+   }
 }
 
 function winnerScoreBoard(officialWins, data) {
@@ -465,29 +468,44 @@ function winnerScoreBoard(officialWins, data) {
     let q3Winner = document.querySelector('.q3Winner')
     let q4Winner = document.querySelector('.q4Winner')
 
-    q1Winner.innerHTML = '🏆'
-    q2Winner.textContent = 'TBD'
-    q3Winner.innerHTML = 'tbd'
-    q4Winner.innerHTML = 'tbd'
+    
+    
+    
+    
 
     console.log('DATA 2:', data)
-   for (var i = 0; i < officialWins.length; i++) {
+    console.log(officialWins)
+   officialWins.forEach((win) => {
+
+   
       if(data.Score.Has1stQuarterStarted === true && data.Score.Has2ndQuarterStarted === false) {
-        
-        q1Winner.innerHTML += officialWins[i]
+        q1Winner.innerHTML = ''
+        q1Winner.innerHTML += win
+        q2Winner.innerHTML = '🏆'
+    q3Winner.innerHTML = '🏆'
+    q4Winner.innerHTML = '🏆'
       } else if (data.Score.Has2ndQuarterStarted === true && data.Score.Has3rdQuarterStarted === false){
-        
-        q2Winner.innerHTML += officialWins[i]
+        q2Winner.innerHTML = ''
+        q2Winner.innerHTML += win
+    q3Winner.innerHTML = '🏆'
+    q4Winner.innerHTML = '🏆'
       } else if (data.Score.Has3rdQuarterStarted === true && data.Score.Has4thQuarterStarted === false) {
-        
-        q3Winner.innerHTML += officialWins[i]
+        q3Winner.innerHTML = ''
+        q3Winner.innerHTML += win
+    q4Winner.innerHTML = '🏆'
       } else if (data.Score.Has4thQuarterStarted === true) {
-        
-        q4Winner.innerHTML += officialWins[i]
+        q4Winner.innerHTML = ''
+        q4Winner.innerHTML += win
         console.log('4th', officialWins[i])
       } else {
+        q1Winner.innerHTML = '🏆'
+    q2Winner.innerHTML = '🏆'
+    q3Winner.innerHTML = '🏆'
+    q4Winner.innerHTML = '🏆'
         return;
       }
-   }
+    })
+   officialWins = []
+   console.log(officialWins)
 }
 

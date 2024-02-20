@@ -16,7 +16,7 @@ router.get('/:sportdate', async (req, res) => {
 
 const dateData = req.params.sportdate
 console.log(dateData);
-  let sportsAPI = `https://replay.sportsdata.io/api/v3/nfl/stats/json/scoresbydate/${dateData}?key=194afa920849496da7e071df4b26f7d7`;
+  let sportsAPI = `https://replay.sportsdata.io/api/v3/nfl/stats/json/scoresbydate/${dateData}?key=0cc0f915748b4792bb0f766cc1ba177d`;
   console.log('Date API: ', sportsAPI)
   fetch(sportsAPI).then(function(response) {
     return response.json();
