@@ -307,15 +307,26 @@ function selectGame(data) {
 
 function startGame() {
   const questionBox = document.querySelectorAll(".question-box");
-  let i = 0;
-  const numGenerator = setInterval(() => {
-    const randomNumber = Math.floor(Math.random() * 10);
-    questionBox[i].textContent = randomNumber;
-    i++;
-    if (i > 19) {
-      clearInterval(numGenerator);
-    }
-  }, 50);
+  let homeBoxArr = [0,1,2,3,4,5,6,7,8,9]
+  let awayBoxArr = [0,1,2,3,4,5,6,7,8,9]
+//   let i = 0;
+    // i++;
+    for (var i = 0; i < 20; i++) {
+    console.log(i)
+   if (i < 10) {
+    let randomHomeArr = homeBoxArr.splice(Math.floor(Math.random() * homeBoxArr.length), 1);
+    // awayBoxArr.push(randomHomeArr);
+    questionBox[i].textContent = randomHomeArr;
+    console.log(awayBoxArr)
+   } else if(11 < i < 20) {
+    let randomAwayArr = awayBoxArr.splice(Math.floor(Math.random() * awayBoxArr.length), 1);
+    // homeBoxArr.push(randomAwayArr);
+    questionBox[i].textContent = randomAwayArr;
+    console.log(homeBoxArr)
+   } else {
+    return;
+   }
+  }
 }
 
 function clearNumbers() {
