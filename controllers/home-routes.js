@@ -29,6 +29,30 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/profile', withAuth, async (req, res) => {
+  console.log('User ID from session', req.session.user_id)
+  try {
+    // Retrieve user data from the database
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+    console.log(userData)
+    if (!userData) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+    const serializedUser = userData.get({ plain: true })
+    console.log(serializedUser)
+    // Render the profile page with user data
+    res.render('profile', {
+      user: serializedUser,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/homepage', withAuth, (req, res) => {
   res.render('homepage', {
     loggedIn: req.session.loggedIn

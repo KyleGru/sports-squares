@@ -20,6 +20,8 @@ Navigate to the website to begin by clicking the link below. Once there login or
 
 ![alt text](./Assets/Screenshot%202024-02-12%20205338.png)
 
+https://sports-sq-fd69cbb2824b.herokuapp.com/
+
 ## Credits
 
 Kyle Gruschow
