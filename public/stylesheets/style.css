@@ -26,6 +26,16 @@ h2 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+.changeUsernameBtn {
+  background-color: rgb(238, 3, 39);
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 /* login/signup styling */
 .row {
   display: flex;

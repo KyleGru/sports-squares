@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -61,6 +62,7 @@ router.post("/login", async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.username = dbUserData.username;
+      req.session.user_id = dbUserData.id;
       console.log(
         "File: user-routes.js ~ line 57 ~ req.session.save ~ req.session.cookie",
         req.session.cookie
@@ -76,19 +78,26 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Logout
-// router.post("/logout", (req, res) => {
-//   if (req.session.loggedIn) {
-//     req.session.destroy(() => {
-//       res.redirect('/login');
-//       res.status(204).end();
-//     });
-//   } else {
-//     res.status(404).end();
-//     res.render('login')
-//   }
-  
-// });
+router.get('/profile', withAuth, async (req, res) => {
+  console.log('User ID from session', req.session.user_id)
+  try {
+    // Retrieve user data from the database
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+    console.log(userData)
+    if (!userData) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+    const serializedUser = userData.get({ plain: true })
+    console.log(serializedUser)
+    // Render the profile page with user data
+    res.sendStatus(200);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
