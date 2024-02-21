@@ -23,6 +23,7 @@ function refreshFetch(scoreId) {
     officialWins = []
     console.log("Refresh ID", scoreId);
     getSportApi(scoreId);
+    saveGameData()
   }, 30000);
 }
 
@@ -494,17 +495,12 @@ function recordWinner(data) {
    }
 }
 
-function winnerScoreBoard(officialWins, data) {
-    let q1Winner = document.querySelector('.q1Winner')
+let q1Winner = document.querySelector('.q1Winner')
     let q2Winner = document.querySelector('.q2Winner')
     let q3Winner = document.querySelector('.q3Winner')
     let q4Winner = document.querySelector('.q4Winner')
 
-    
-    
-    
-    
-
+function winnerScoreBoard(officialWins, data) {
     console.log('DATA 2:', data)
     console.log(officialWins)
    officialWins.forEach((win) => {
@@ -541,3 +537,35 @@ function winnerScoreBoard(officialWins, data) {
    console.log(officialWins)
 }
 
+let TDs = document.querySelectorAll('td')
+
+function saveGameData() {
+
+   let i = 0
+  TDs.forEach((sq) => {
+     i++
+     localStorage.setItem(`TR ${i}`, sq.textContent)
+  })
+  localStorage.setItem('Q1 Winner', q1Winner.textContent)
+  localStorage.setItem('Q2 Winner', q2Winner.textContent)
+  localStorage.setItem('Q3 Winner', q3Winner.textContent)
+  localStorage.setItem('Q4 Winner', q4Winner.textContent)
+}
+
+function getGameData() {
+    if(!localStorage.getItem(`TR 1`)) {
+        return;
+    } else {
+    let i = 0
+    TDs.forEach((sq) => {
+      i++
+      sq.textContent = localStorage.getItem(`TR ${i}`)
+    })
+    q1Winner.textContent = localStorage.getItem('Q1 Winner')
+    q2Winner.textContent = localStorage.getItem('Q2 Winner')
+    q3Winner.textContent = localStorage.getItem('Q3 Winner')
+    q4Winner.textContent = localStorage.getItem('Q4 Winner')
+  }
+}
+
+getGameData();
