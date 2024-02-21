@@ -1,3 +1,5 @@
+
+
 // get game info by game id
 function getSportApi(scoreId) {
   let requestUrl = `/api/sportFetch/${scoreId}`;
@@ -56,7 +58,7 @@ function fetchByDate(currentTime) {
   }, 1000);
 }
 
-//   getGameList();
+  
 
 function getGameList(currentTime) {
   let requestUrl = `/api/gamesAvailable/${currentTime}`;
@@ -71,7 +73,7 @@ function getGameList(currentTime) {
     });
 }
 
-getCurrentDate();
+
 
 function getCurrentDate() {
   let requestUrl = `/api/gameDateInfo`;
@@ -94,7 +96,7 @@ function createFirstRow(questionBoxes) {
   for (let i = 0; i < questionBoxes; i++) {
     const cell = document.createElement("td");
     if (i === 0) {
-      cell.textContent = "X";
+      cell.textContent = "Reset";
       cell.classList.add("X-box");
     } else {
       cell.textContent = "?";
@@ -271,6 +273,10 @@ function renderGameInfo(data) {
 }
 
 function selectGame(data) {
+    document.getElementById("clearOpenBtn").classList.add('hide');
+document.getElementById("clearBtn").classList.add('hide')
+document.getElementById("startBtn").classList.add('hide')
+document.querySelector('.X-box').classList.add('.xText');
   const gameChoice = document.querySelector(".gameChoices");
   gameChoice.classList.add("scoreBtnDiv");
 
@@ -329,6 +335,15 @@ function startGame() {
   }
 }
 
+let chooseGame = document.querySelector('.chooseGame')
+
+function startSquares() {
+    startSquaresBtn.classList.add('hide')
+    chooseGame.classList.remove('hide')
+    getCurrentDate();
+    getGameList();
+}
+
 function clearNumbers() {
   const questionBox = document.querySelectorAll(".question-box");
   questionBox.forEach((box) => {
@@ -347,11 +362,17 @@ function clearOpen() {
 document.getElementById("clearOpenBtn").addEventListener("click", clearOpen);
 document.getElementById("clearBtn").addEventListener("click", clearNumbers);
 document.getElementById("startBtn").addEventListener("click", startGame);
+let startSquaresBtn = document.querySelector('.startSquares')
 
 changeUserBtn.addEventListener("click", function (event) {
   event.preventDefault();
   changeUsername();
 });
+
+startSquaresBtn.addEventListener("click", function (event) {
+    event.preventDefault()
+    startSquares()
+})
 
 function selectWinner(data) {
   let winnerArray = [];
