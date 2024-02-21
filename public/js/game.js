@@ -1,3 +1,5 @@
+
+
 // get game info by game id
 function getSportApi(scoreId) {
   let requestUrl = `/api/sportFetch/${scoreId}`;
@@ -21,6 +23,7 @@ function refreshFetch(scoreId) {
     officialWins = []
     console.log("Refresh ID", scoreId);
     getSportApi(scoreId);
+    saveGameData()
   }, 30000);
 }
 
@@ -56,7 +59,7 @@ function fetchByDate(currentTime) {
   }, 1000);
 }
 
-//   getGameList();
+  
 
 function getGameList(currentTime) {
   let requestUrl = `/api/gamesAvailable/${currentTime}`;
@@ -71,7 +74,7 @@ function getGameList(currentTime) {
     });
 }
 
-getCurrentDate();
+
 
 function getCurrentDate() {
   let requestUrl = `/api/gameDateInfo`;
@@ -94,7 +97,7 @@ function createFirstRow(questionBoxes) {
   for (let i = 0; i < questionBoxes; i++) {
     const cell = document.createElement("td");
     if (i === 0) {
-      cell.textContent = "X";
+      cell.textContent = "Reset";
       cell.classList.add("X-box");
     } else {
       cell.textContent = "?";
@@ -271,6 +274,10 @@ function renderGameInfo(data) {
 }
 
 function selectGame(data) {
+    document.getElementById("clearOpenBtn").classList.add('hide');
+document.getElementById("clearBtn").classList.add('hide')
+document.getElementById("startBtn").classList.add('hide')
+document.querySelector('.X-box').classList.add('.xText');
   const gameChoice = document.querySelector(".gameChoices");
   gameChoice.classList.add("scoreBtnDiv");
 
@@ -329,6 +336,15 @@ function startGame() {
   }
 }
 
+let chooseGame = document.querySelector('.chooseGame')
+
+function startSquares() {
+    startSquaresBtn.classList.add('hide')
+    chooseGame.classList.remove('hide')
+    getCurrentDate();
+    getGameList();
+}
+
 function clearNumbers() {
   const questionBox = document.querySelectorAll(".question-box");
   questionBox.forEach((box) => {
@@ -347,11 +363,31 @@ function clearOpen() {
 document.getElementById("clearOpenBtn").addEventListener("click", clearOpen);
 document.getElementById("clearBtn").addEventListener("click", clearNumbers);
 document.getElementById("startBtn").addEventListener("click", startGame);
+let startSquaresBtn = document.querySelector('.startSquares')
+let resetBtn = document.querySelector('.X-box')
 
 changeUserBtn.addEventListener("click", function (event) {
   event.preventDefault();
   changeUsername();
 });
+
+startSquaresBtn.addEventListener("click", function (event) {
+    event.preventDefault()
+    startSquares()
+})
+
+resetBtn.addEventListener("click", function (event) {
+    event.preventDefault()
+    clearNumbers()
+    clearSelectedOpenBoxes()
+    clearOpen()
+    q1Winner.innerHTML = '🏆'
+    q2Winner.innerHTML = '🏆'
+    q3Winner.innerHTML = '🏆'
+    q4Winner.innerHTML = '🏆'
+    localStorage.clear()
+    location.reload();
+})
 
 function selectWinner(data) {
   let winnerArray = [];
@@ -473,17 +509,12 @@ function recordWinner(data) {
    }
 }
 
-function winnerScoreBoard(officialWins, data) {
-    let q1Winner = document.querySelector('.q1Winner')
+let q1Winner = document.querySelector('.q1Winner')
     let q2Winner = document.querySelector('.q2Winner')
     let q3Winner = document.querySelector('.q3Winner')
     let q4Winner = document.querySelector('.q4Winner')
 
-    
-    
-    
-    
-
+function winnerScoreBoard(officialWins, data) {
     console.log('DATA 2:', data)
     console.log(officialWins)
    officialWins.forEach((win) => {
@@ -520,3 +551,39 @@ function winnerScoreBoard(officialWins, data) {
    console.log(officialWins)
 }
 
+let TDs = document.querySelectorAll('td')
+
+function saveGameData() {
+
+   let i = 0
+  TDs.forEach((sq) => {
+     i++
+     localStorage.setItem(`TR ${i}`, sq.textContent)
+  })
+  localStorage.setItem('Q1 Winner', q1Winner.textContent)
+  localStorage.setItem('Q2 Winner', q2Winner.textContent)
+  localStorage.setItem('Q3 Winner', q3Winner.textContent)
+  localStorage.setItem('Q4 Winner', q4Winner.textContent)
+}
+
+function getGameData() {
+    if(!localStorage.getItem(`TR 1`)) {
+        q1Winner.innerHTML = '🏆'
+    q2Winner.innerHTML = '🏆'
+    q3Winner.innerHTML = '🏆'
+    q4Winner.innerHTML = '🏆'
+        return;
+    } else {
+    let i = 0
+    TDs.forEach((sq) => {
+      i++
+      sq.textContent = localStorage.getItem(`TR ${i}`)
+    })
+    q1Winner.textContent = localStorage.getItem('Q1 Winner')
+    q2Winner.textContent = localStorage.getItem('Q2 Winner')
+    q3Winner.textContent = localStorage.getItem('Q3 Winner')
+    q4Winner.textContent = localStorage.getItem('Q4 Winner')
+  }
+}
+
+getGameData();
