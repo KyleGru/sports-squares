@@ -226,6 +226,7 @@ h2 {
 
   .winningSquare {
     background-color: green;
+    animation: blinker 1s linear infinite;
   }
 
   .X-box {

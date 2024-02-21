@@ -364,6 +364,7 @@ document.getElementById("clearOpenBtn").addEventListener("click", clearOpen);
 document.getElementById("clearBtn").addEventListener("click", clearNumbers);
 document.getElementById("startBtn").addEventListener("click", startGame);
 let startSquaresBtn = document.querySelector('.startSquares')
+let resetBtn = document.querySelector('.X-box')
 
 changeUserBtn.addEventListener("click", function (event) {
   event.preventDefault();
@@ -373,6 +374,19 @@ changeUserBtn.addEventListener("click", function (event) {
 startSquaresBtn.addEventListener("click", function (event) {
     event.preventDefault()
     startSquares()
+})
+
+resetBtn.addEventListener("click", function (event) {
+    event.preventDefault()
+    clearNumbers()
+    clearSelectedOpenBoxes()
+    clearOpen()
+    q1Winner.innerHTML = '🏆'
+    q2Winner.innerHTML = '🏆'
+    q3Winner.innerHTML = '🏆'
+    q4Winner.innerHTML = '🏆'
+    localStorage.clear()
+    location.reload();
 })
 
 function selectWinner(data) {
@@ -554,6 +568,10 @@ function saveGameData() {
 
 function getGameData() {
     if(!localStorage.getItem(`TR 1`)) {
+        q1Winner.innerHTML = '🏆'
+    q2Winner.innerHTML = '🏆'
+    q3Winner.innerHTML = '🏆'
+    q4Winner.innerHTML = '🏆'
         return;
     } else {
     let i = 0
