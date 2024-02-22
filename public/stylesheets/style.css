@@ -235,6 +235,11 @@ h2 {
      font-size: 11pt;
      font-weight: 600;
      animation: blinker 2s linear infinite;
+     cursor: pointer;
+  }
+
+  .errorMsg {
+    color: red;
   }
 
 
