@@ -78,6 +78,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get('/game', withAuth, (req, res) => {
+  // Render the game.handlebars template and pass any necessary data
+  res.render('game', {
+    loggedIn: req.session.loggedIn,
+  });
+});
+
+
 router.get('/profile', withAuth, async (req, res) => {
   console.log('User ID from session', req.session.user_id)
   try {
