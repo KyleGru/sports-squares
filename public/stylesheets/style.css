@@ -100,6 +100,15 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 10px;
+  box-shadow: 0 6px #999;
+}
+
+.topLeftBtn:hover {background-color: rgb(145, 6, 26)}
+
+.topLeftBtn:active {
+  background-color: rgb(145, 6, 26);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .topRightBtn {
@@ -111,6 +120,15 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 10px;
+  box-shadow: 0 6px #999;
+}
+
+.topRightBtn:hover {background-color: rgb(145, 6, 26)}
+
+.topRightBtn:active {
+  background-color: rgb(145, 6, 26);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .game-board {
@@ -196,7 +214,17 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 0 7px #999;
+    animation:colorchange 1s infinite alternate;
   }
+
+  .startSquares:hover {background-color: rgb(145, 6, 26)}
+
+.startSquares:active {
+  background-color: rgb(145, 6, 26);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
   
   .btn-submit {
     background-color: rgb(238, 3, 39);
@@ -235,11 +263,39 @@ h2 {
      font-size: 11pt;
      font-weight: 600;
      animation: blinker 2s linear infinite;
+     cursor: pointer;
   }
+
+  
 
 
   @keyframes blinker {
     50% {
       opacity: 50%;
+    }
+  }
+
+  @keyframes colorchange {
+    0% {
+      
+      color: blue;
+    }
+    25% {
+      
+      color: rgb(46, 214, 46);
+    }
+    
+    50% {
+      
+      color: #ee680f;
+    }
+    
+    75% {
+      
+      color: rgb(178, 11, 230);
+    }
+    100% {
+      
+      color: goldenrod;
     }
   }
