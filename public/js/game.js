@@ -140,8 +140,10 @@ function createGrid(numRows, numBoxesPerRow) {
 createGrid(10, 11);
 
 let changeUserBtn = document.querySelector(".changeUsernameBtn");
+let errorMsg = document.querySelector('.errorMsg')
 
 function changeUsername() {
+  errorMsg.classList.add('hide')
   let usernameForm = document.querySelector(".changeUsername");
   let usernameInput = usernameForm.value;
   localStorage.setItem("username", usernameInput);
@@ -150,7 +152,13 @@ function changeUsername() {
 
 function handleClick(event) {
   let placeUsername = localStorage.getItem("username");
-  event.target.textContent = placeUsername;
+  if (placeUsername) {
+    event.target.textContent = placeUsername;
+  } else {
+   
+    return;
+  }
+  
 }
 
 function clearSelectedOpenBoxes() {
@@ -162,11 +170,19 @@ function clearSelectedOpenBoxes() {
 
 function selectOpenBox() {
   const openBoxes = document.querySelectorAll(".open-box");
+  
+  errorMsg.classList.add('hide')
   openBoxes.forEach((box) => {
     box.addEventListener("click", (event) => {
       const placeUsername = localStorage.getItem("username");
-      event.target.textContent = placeUsername;
-      event.target.classList.toggle("selected");
+      if (placeUsername) {
+        event.target.textContent = placeUsername;
+        event.target.classList.toggle("selected");
+      } else {
+        errorMsg.classList.remove('hide')
+        return;
+      }
+      
     });
   });
 }
