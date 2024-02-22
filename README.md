@@ -24,7 +24,7 @@ https://sports-sq-fd69cbb2824b.herokuapp.com/
 
 ## Tests
 
-Instruction Video:
+Instruction Video: https://drive.google.com/file/d/1Co6Iaj8tKqd2fADmLnWLRillXwDRk92Y/view
 
 Steps:
 
