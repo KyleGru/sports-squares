@@ -30,6 +30,29 @@ p {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+a {
+  display: flex;
+  max-width: 10%;
+  justify-content: center;
+  background-color: rgb(238, 3, 39);
+  color: #fff;
+  padding: 5px 0px;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px #999;
+}
+
+a:hover {background-color: rgb(145, 6, 26)}
+
+a:active {
+  background-color: rgb(145, 6, 26);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .changeUsernameBtn {
   background-color: rgb(238, 3, 39);
   color: #fff;
@@ -277,6 +300,15 @@ p {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 0 3px #999;
+  }
+  
+  .btn-submit:hover {background-color: rgb(145, 6, 26)}
+  
+  .btn-submit:active {
+    background-color: rgb(145, 6, 26);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
   }
 
   .hide {
