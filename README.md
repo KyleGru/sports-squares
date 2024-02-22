@@ -22,6 +22,19 @@ Navigate to the website to begin by clicking the link below. Once there login or
 
 https://sports-sq-fd69cbb2824b.herokuapp.com/
 
+## Tests
+
+Instruction Video:
+
+Steps:
+Go to https://sportsdata.io/
+Login
+Go to "Developers" tab and find SportsDataIO Replay
+Click "Start Replay"
+Select NFL, Week 12 or 14, and set the date to the available Monday with the time at 8:30 PM
+Take newly generated API key and replace it in the repo's API folder for gameDateInfo.js, gamesAvailable.js, and sportFetch.js
+Restart server and run game!
+
 ## Credits
 
 Kyle Gruschow
