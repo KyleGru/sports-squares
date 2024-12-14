@@ -358,7 +358,7 @@ function startSquares() {
     startSquaresBtn.classList.add('hide')
     chooseGame.classList.remove('hide')
     getCurrentDate();
-    getGameList();
+    // getGameList();
 }
 
 function clearNumbers() {
@@ -603,3 +603,5 @@ function getGameData() {
 }
 
 getGameData();
+
+//Click function by user to keep track of squares
