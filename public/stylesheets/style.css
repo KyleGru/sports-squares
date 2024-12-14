@@ -198,15 +198,18 @@ a:active {
   transform: translateY(4px);
 }
 
-
-
-
+.theOddsBoard {
+  position: absolute;
+  top: 9%;
+  right: -25%;
+}
 
 .game-board {
     display: grid;
     grid-template-columns: repeat(11, 0fr); /* 10 columns for digits 0-9 */
     grid-template-rows: repeat(11, 0fr); /* 10 rows for digits 0-9 */
     gap: 5px; /* Gap between grid items */
+    
   }
   
   .row {
