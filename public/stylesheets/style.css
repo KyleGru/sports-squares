@@ -6,6 +6,7 @@ body {
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
     min-height: 100vh; /* Ensure the entire viewport height is covered */
+    /* overflow: hidden; */
 }
 
 .wrapper {
@@ -197,22 +198,14 @@ a:active {
   transform: translateY(4px);
 }
 
-.game-board {
-  /* flex-grow: 1; Occupy remaining space */
-  display: grid;
-  grid-template-columns: repeat(11, 1fr); /* 10 columns for digits 0-9 */
-  grid-template-rows: repeat(11, 1fr); /* 10 rows for digits 0-9 */
-  gap: 5px; /* Gap between grid items */
-  margin: 0 auto; /* Center horizontally */
-  width: 80%; /* Set the width as needed */
-}
+
 
 
 
 .game-board {
     display: grid;
-    grid-template-columns: repeat(11, 1fr); /* 10 columns for digits 0-9 */
-    grid-template-rows: repeat(11, 1fr); /* 10 rows for digits 0-9 */
+    grid-template-columns: repeat(11, 0fr); /* 10 columns for digits 0-9 */
+    grid-template-rows: repeat(11, 0fr); /* 10 rows for digits 0-9 */
     gap: 5px; /* Gap between grid items */
   }
   
