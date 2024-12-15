@@ -160,7 +160,34 @@ a:active {
 
 .oddsFlex {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 15%;
+}
+
+.wagerInput {
+  width: 20%;
+  font-size: 15pt;
+  border-radius: 10px 10px 10px 10px;
+  border: solid rgb(23, 197, 23) 3px;
+  margin-top: 1%;
+}
+
+.wagerBtn {
+  font-size: 15pt;
+  color: white;
+  background-color: rgb(23, 197, 23);
+  border-radius: 5px 5px 5px 5px;
+}
+
+.wagerBtn:hover {
+  cursor: pointer;
+  background-color: rgb(19, 155, 19);
+}
+
+.multi {
+  font-size: 10pt;
+  text-align: start;
+  margin-right: 17%;
 }
 
 .topLeftBtn {
@@ -205,8 +232,8 @@ a:active {
 
 .theOddsBoard {
   position: absolute;
-  top: 9%;
-  right: -25%;
+  top: 0%;
+  right: -37%;
 }
 
 .game-board {
