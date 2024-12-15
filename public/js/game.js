@@ -170,14 +170,23 @@ function clearSelectedOpenBoxes() {
 
 function selectOpenBox() {
   const openBoxes = document.querySelectorAll(".open-box");
+  const userNameArr = []
   
   errorMsg.classList.add('hide')
   openBoxes.forEach((box) => {
     box.addEventListener("click", (event) => {
       const placeUsername = localStorage.getItem("username");
+
+       if (!userNameArr.includes(placeUsername)) {
+        userNameArr.push(placeUsername)
+        console.log('userArr', userNameArr)
+        playerSquareCount(userNameArr)
+       }
+
       if (placeUsername) {
         event.target.textContent = placeUsername;
         event.target.classList.toggle("selected");
+        countSquares(placeUsername)
       } else {
         errorMsg.classList.remove('hide')
         return;
@@ -188,6 +197,42 @@ function selectOpenBox() {
 }
 
 selectOpenBox();
+
+function playerSquareCount(userNameArr) {
+const oddsBoard = document.querySelector('#oddsCount')
+console.log(userNameArr)
+
+   userNameArr.forEach((user) => {
+    if (!document.querySelector(`.${user}`)) {
+      const countContainer = document.createElement('div')
+      const username = document.createElement('p')
+      const userCount = document.createElement('p')
+      oddsBoard.appendChild(countContainer)
+      countContainer.appendChild(username)
+      countContainer.appendChild(userCount)
+      userCount.classList.add(user)
+      countContainer.classList.add('oddsFlex')
+      username.textContent = user
+    }
+    
+  })
+}
+
+function countSquares(placeUsername) {
+  console.log('user count start', placeUsername)
+   const userSelectedSquares = document.querySelector(`.${placeUsername}`)
+   let count = 0
+   TDs.forEach((sq) => {
+    // console.log(sq.textContent)
+    
+    if (sq.textContent === placeUsername) {
+      count = count + 1
+      //  console.log(count)
+       userSelectedSquares.textContent = count
+    }
+    // possibly reset count to 0 after loop runs
+   })
+}
 
 function renderGameInfo(data) {
   const homeTeam = document.querySelector(".homeTeam");
@@ -382,6 +427,7 @@ document.getElementById("startBtn").addEventListener("click", startGame);
 let startSquaresBtn = document.querySelector('.startSquares')
 let resetBtn = document.querySelector('.X-box')
 
+
 changeUserBtn.addEventListener("click", function (event) {
   event.preventDefault();
   changeUsername();
@@ -404,6 +450,8 @@ resetBtn.addEventListener("click", function (event) {
     localStorage.clear()
     location.reload();
 })
+
+
 
 function selectWinner(data) {
   let winnerArray = [];
