@@ -223,14 +223,10 @@ function countSquares(placeUsername) {
    const userSelectedSquares = document.querySelector(`.${placeUsername}`)
    let count = 0
    TDs.forEach((sq) => {
-    // console.log(sq.textContent)
-    
     if (sq.textContent === placeUsername) {
       count = count + 1
-      //  console.log(count)
        userSelectedSquares.textContent = count
     }
-    // possibly reset count to 0 after loop runs
    })
 }
 
