@@ -168,9 +168,14 @@ function clearSelectedOpenBoxes() {
   });
 }
 
-function selectOpenBox() {
+const globalOddsInfo = {
+  userNameArr: [],
+  wager: 0
+}
+
+function selectOpenBox(wager) {
   const openBoxes = document.querySelectorAll(".open-box");
-  const userNameArr = []
+  const userNameArr = globalOddsInfo.userNameArr
   
   errorMsg.classList.add('hide')
   openBoxes.forEach((box) => {
@@ -200,17 +205,20 @@ selectOpenBox();
 
 function playerSquareCount(userNameArr) {
 const oddsBoard = document.querySelector('#oddsCount')
-console.log(userNameArr)
+
 
    userNameArr.forEach((user) => {
     if (!document.querySelector(`.${user}`)) {
       const countContainer = document.createElement('div')
       const username = document.createElement('p')
       const userCount = document.createElement('p')
+      const wagerAmount = document.createElement('p')
       oddsBoard.appendChild(countContainer)
       countContainer.appendChild(username)
       countContainer.appendChild(userCount)
+      countContainer.appendChild(wagerAmount)
       userCount.classList.add(user)
+      wagerAmount.classList.add(`${user}-wager`)
       countContainer.classList.add('oddsFlex')
       username.textContent = user
     }
@@ -228,6 +236,22 @@ function countSquares(placeUsername) {
        userSelectedSquares.textContent = count
     }
    })
+   const userNameArr = globalOddsInfo.userNameArr
+   const wager = globalOddsInfo.wager
+   wagerMultiplier(userNameArr, wager)
+}
+
+function wagerMultiplier(userNameArr, wager) {
+  console.log('user arr', userNameArr)
+   console.log('wager', wager)
+
+  userNameArr.forEach((user) => {
+    const currentCount = document.querySelector(`.${user}`).textContent
+    const wagerTotal = currentCount * wager
+    const userWager = document.querySelector(`.${user}-wager`)
+    userWager.textContent = `⛃${wagerTotal}`
+  })
+
 }
 
 function renderGameInfo(data) {
@@ -422,6 +446,7 @@ document.getElementById("clearBtn").addEventListener("click", clearNumbers);
 document.getElementById("startBtn").addEventListener("click", startGame);
 let startSquaresBtn = document.querySelector('.startSquares')
 let resetBtn = document.querySelector('.X-box')
+let multiplierBtn = document.querySelector('.wagerBtn')
 
 
 changeUserBtn.addEventListener("click", function (event) {
@@ -447,7 +472,15 @@ resetBtn.addEventListener("click", function (event) {
     location.reload();
 })
 
-
+multiplierBtn.addEventListener('click', (event) => {
+   event.preventDefault()
+   let userWager = document.querySelector('.wagerInput').value
+   // add function call to multiply btn clicks by wager
+   globalOddsInfo.wager = userWager
+   const userNameArr = globalOddsInfo.userNameArr
+   const wager = globalOddsInfo.wager
+   wagerMultiplier(userNameArr, wager)
+})
 
 function selectWinner(data) {
   let winnerArray = [];
