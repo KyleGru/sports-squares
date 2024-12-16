@@ -161,7 +161,21 @@ a:active {
 .oddsFlex {
   display: flex;
   justify-content: center;
-  gap: 15%;
+  gap: 25%;
+  margin-bottom: 6%;
+    margin-top: 6%;
+}
+
+.oddsTitles {
+  font-family: cursive;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 4%;
+    margin-top: 4%;
+}
+
+.boardFiller {
+  margin-bottom: 85%;
 }
 
 .wagerInput {
@@ -231,11 +245,15 @@ a:active {
 }
 
 .theOddsBoard {
+  font-family: cursive;
+  color: rgb(231, 222, 222);
   position: absolute;
   top: 0%;
-  right: -37%;
-  background: linear-gradient(#2a2e31 10%, #4a4d50 90%);
+  right: -40%;
+  background: linear-gradient(#2a2e31 25%, #4a4d50 75%);
   width: 35%;
+  border: solid rgb(87, 56, 21) 5px;
+  border-radius: 5px 5px 5px 5px;
 }
 
 .game-board {

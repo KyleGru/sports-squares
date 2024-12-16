@@ -205,18 +205,19 @@ selectOpenBox();
 
 function playerSquareCount(userNameArr) {
 const oddsBoard = document.querySelector('#oddsCount')
-
+const boardFiller = document.querySelector('.oddsTitles')
 
    userNameArr.forEach((user) => {
     if (!document.querySelector(`.${user}`)) {
       const countContainer = document.createElement('div')
-      const username = document.createElement('p')
-      const userCount = document.createElement('p')
-      const wagerAmount = document.createElement('p')
+      const username = document.createElement('span')
+      const userCount = document.createElement('span')
+      const wagerAmount = document.createElement('span')
       oddsBoard.appendChild(countContainer)
       countContainer.appendChild(username)
       countContainer.appendChild(userCount)
       countContainer.appendChild(wagerAmount)
+      boardFiller.classList.remove('boardFiller')
       userCount.classList.add(user)
       wagerAmount.classList.add(`${user}-wager`)
       countContainer.classList.add('oddsFlex')
