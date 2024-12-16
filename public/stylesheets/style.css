@@ -233,7 +233,9 @@ a:active {
 .theOddsBoard {
   position: absolute;
   top: 0%;
-  right: -45%;
+  right: -37%;
+  background: linear-gradient(#2a2e31 10%, #4a4d50 90%);
+  width: 35%;
 }
 
 .game-board {
