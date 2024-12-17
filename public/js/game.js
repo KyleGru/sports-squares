@@ -364,6 +364,9 @@ document.getElementById("clearBtn").classList.add('hide')
 document.getElementById("startBtn").classList.add('hide')
 document.querySelector('.X-box').classList.add('.xText');
   const gameChoice = document.querySelector(".gameChoices");
+  const scoreBoard = document.querySelector('.scoreCard')
+  const chooseGameHeader = document.querySelector('.chooseGame')
+
   gameChoice.classList.add("scoreBtnDiv");
 
   console.log("Select Game", data);
@@ -389,6 +392,8 @@ document.querySelector('.X-box').classList.add('.xText');
     choice.onclick = function () {
       gameChoice.classList.add("hide");
       gameChoice.classList.remove("scoreBtnDiv");
+      scoreBoard.classList.remove('hide')
+      chooseGameHeader.classList.add('hide')
       console.log("click", keyData);
       let scoreId = localStorage.getItem(keyData);
       fetchById(scoreId, globalOddsInfo);
@@ -432,10 +437,8 @@ function startSquares(globalOddsInfo) {
     if (gameStarted) {
       const multiplierDiv = document.getElementById('multiplierDiv')
       const multiplierHeader = document.querySelector('.multi')
-      const scoreBoard = document.querySelector('.scoreCard')
       multiplierDiv.classList.add('hide')
       multiplierHeader.classList.add('hide')
-      scoreBoard.classList.remove('hide')
     }
 }
 
