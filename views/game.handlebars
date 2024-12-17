@@ -5,11 +5,24 @@
   <button type="submit" class="changeUsernameBtn btn-submit">submit</button>
 </div>
 <p class="errorMsg">Please Enter A Username!</p>
-   
     <div style="margin-top: 4%;">
-      <div class="scoreCard hide" style="font-size: 59px; margin-top: 5%">
-    Score Board
-     <div style="display: flex; font-size: 20px; gap: 4%; justify-content: center; margin-bottom: 5%">
+      <div class="scoreCard hide" >
+    <span style="font-size: 50px; margin-top: 5%">Score Board</span>
+    <div class="gameInfo">
+      <div>
+        <h5 class="homeTeam"></h5>
+        <p class="homeScore"></p>
+      </div>
+      <div>
+        <h5 class="quarter"></h5>
+        <h5 class="gamePlay"></h5>
+      </div>
+      <div>
+        <h5 class="awayTeam"></h5>
+        <p class="awayScore"></p>
+      </div>
+    </div>
+     <div style="display: flex; font-size: 20px; gap: 4%; justify-content: center; margin-bottom: 15%">
       <div>
         <div>Q1</div>
         <div class="Q1Win"></div>
@@ -42,20 +55,7 @@
       </div>
     </div>
 
-    <div class="gameInfo">
-      <div>
-        <h5 class="homeTeam"></h5>
-        <p class="homeScore"></p>
-      </div>
-      <div>
-        <h5 class="quarter"></h5>
-        <h5 class="gamePlay"></h5>
-      </div>
-      <div>
-        <h5 class="awayTeam"></h5>
-        <p class="awayScore"></p>
-      </div>
-    </div>
+    
     <div class="card-content has-background-black">
       <div class="columns is-gapless is-mobile">
         <div class="column is-half" style="padding-right: 5px;">

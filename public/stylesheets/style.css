@@ -220,7 +220,7 @@ a:active {
 
 .topLeftBtn:active {
   background-color: rgb(145, 6, 26);
-  box-shadow: 0 5px #666;
+  box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
 
@@ -240,7 +240,7 @@ a:active {
 
 .topRightBtn:active {
   background-color: rgb(145, 6, 26);
-  box-shadow: 0 5px #666;
+  box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
 
@@ -330,13 +330,14 @@ a:active {
     cursor: pointer;
     box-shadow: 0 7px #999;
     animation:colorchange 1s infinite alternate;
+    margin-bottom: 3%;
   }
 
   .startSquares:hover {background-color: rgb(145, 6, 26)}
 
 .startSquares:active {
   background-color: rgb(145, 6, 26);
-  box-shadow: 0 5px #666;
+  box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
   
@@ -355,7 +356,7 @@ a:active {
   
   .btn-submit:active {
     background-color: rgb(145, 6, 26);
-    box-shadow: 0 5px #666;
+    box-shadow: 0 2px #666;
     transform: translateY(4px);
   }
 

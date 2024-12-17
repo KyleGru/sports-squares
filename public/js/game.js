@@ -352,7 +352,7 @@ function renderGameInfo(data, globalOddsInfo) {
   }
 
   gameInfo.style.cssText =
-    "margin-bottom: 15%; display: flex; justify-content: center; gap: 20%;";
+    "margin-bottom: 0%; display: flex; justify-content: center; gap: 20%;";
 
   let scoreId = data.Score.ScoreID;
   refreshFetch(scoreId, globalOddsInfo);
