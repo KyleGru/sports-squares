@@ -352,7 +352,7 @@ function renderGameInfo(data, globalOddsInfo) {
   }
 
   gameInfo.style.cssText =
-    "margin-bottom: 15%; display: flex; justify-content: center; gap: 20%;";
+    "margin-bottom: 0%; display: flex; justify-content: space-around; font-size: 25pt; border-top: solid whitesmoke 5px; border-bottom: solid whitesmoke 5px;";
 
   let scoreId = data.Score.ScoreID;
   refreshFetch(scoreId, globalOddsInfo);
@@ -437,8 +437,10 @@ function startSquares(globalOddsInfo) {
     if (gameStarted) {
       const multiplierDiv = document.getElementById('multiplierDiv')
       const multiplierHeader = document.querySelector('.multi')
+      const userInput = document.querySelector('.userInputDiv')
       multiplierDiv.classList.add('hide')
       multiplierHeader.classList.add('hide')
+      userInput.classList.add('hide')
     }
 }
 
@@ -631,22 +633,22 @@ function winnerScoreBoard(officialWins, data) {
    
       if(data.Score.Has1stQuarterStarted === true && data.Score.Has2ndQuarterStarted === false) {
         q1Winner.innerHTML = ''
-        q1Winner.innerHTML += win
+        q1Winner.innerHTML += win + '🏆'
         q2Winner.innerHTML = '🏆'
     q3Winner.innerHTML = '🏆'
     q4Winner.innerHTML = '🏆'
       } else if (data.Score.Has2ndQuarterStarted === true && data.Score.Has3rdQuarterStarted === false){
         q2Winner.innerHTML = ''
-        q2Winner.innerHTML += win
+        q2Winner.innerHTML += win + '🏆'
     q3Winner.innerHTML = '🏆'
     q4Winner.innerHTML = '🏆'
       } else if (data.Score.Has3rdQuarterStarted === true && data.Score.Has4thQuarterStarted === false) {
         q3Winner.innerHTML = ''
-        q3Winner.innerHTML += win
+        q3Winner.innerHTML += win + '🏆'
     q4Winner.innerHTML = '🏆'
       } else if (data.Score.Has4thQuarterStarted === true) {
         q4Winner.innerHTML = ''
-        q4Winner.innerHTML += win
+        q4Winner.innerHTML += win + '🏆'
         console.log('4th', officialWins[i])
       } else {
         q1Winner.innerHTML = '🏆'

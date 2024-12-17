@@ -220,7 +220,7 @@ a:active {
 
 .topLeftBtn:active {
   background-color: rgb(145, 6, 26);
-  box-shadow: 0 5px #666;
+  box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
 
@@ -240,7 +240,7 @@ a:active {
 
 .topRightBtn:active {
   background-color: rgb(145, 6, 26);
-  box-shadow: 0 5px #666;
+  box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
 
@@ -330,13 +330,14 @@ a:active {
     cursor: pointer;
     box-shadow: 0 7px #999;
     animation:colorchange 1s infinite alternate;
+    margin-bottom: 3%;
   }
 
   .startSquares:hover {background-color: rgb(145, 6, 26)}
 
 .startSquares:active {
   background-color: rgb(145, 6, 26);
-  box-shadow: 0 5px #666;
+  box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
   
@@ -355,7 +356,7 @@ a:active {
   
   .btn-submit:active {
     background-color: rgb(145, 6, 26);
-    box-shadow: 0 5px #666;
+    box-shadow: 0 2px #666;
     transform: translateY(4px);
   }
 
@@ -369,6 +370,74 @@ a:active {
     flex-wrap: wrap; 
     gap: 5%; 
     justify-content: center;
+  }
+
+  .digitalBoard {
+    background-color: black;
+    margin-bottom: 15%;
+    border: solid rgb(145, 142, 142) 5px;
+    color: white;
+  }
+
+  .boardHeader {
+    font-size: 50px; 
+    margin-top: 5%;
+    border-bottom: solid whitesmoke 5px;
+    border-right: solid whitesmoke 5px;
+    border-left: solid whitesmoke 5px;
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+
+  .homeTeam {
+    margin-bottom: 1%;
+  }
+
+  .homeScore {
+    font-size: 40pt;
+    margin-top: 2%;
+    color: blue;
+  }
+
+  .awayTeam {
+    margin-bottom: 1%;
+  }
+
+  .awayScore {
+    font-size: 40pt;
+    margin-top: 2%;
+    color: blue;
+  }
+
+  .infoContainerH {
+    border-right: solid whitesmoke 5px;
+    padding-left: 2%;
+    padding-right: 10%;
+  }
+
+  .infoContainerA {
+    border-left: solid whitesmoke 5px;
+    padding-left: 10%;
+    padding-right: 2%;
+  }
+
+  .quarterDiv {
+    border-right: solid whitesmoke 5px;
+    padding-right: 7%;
+  }
+
+  .quarterContainer {
+    display: flex; 
+    font-size: 15pt; 
+    justify-content: space-evenly; 
+  }
+
+  .QHeader {
+    margin-top: 5%;
+  }
+
+  .trophy {
+    margin-bottom: 10%;
   }
 
   .highlightWinner {
