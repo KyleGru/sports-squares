@@ -184,6 +184,11 @@ function selectOpenBox(wager) {
     box.addEventListener("click", (event) => {
       const placeUsername = localStorage.getItem("username");
 
+      if (box.classList.contains('selected')) {
+        event.target.style.pointerEvents = "none";
+        return
+      }
+
        if (!userNameArr.includes(placeUsername) && placeUsername !== null) {
         userNameArr.push(placeUsername)
         console.log('userArr', userNameArr)
@@ -199,6 +204,8 @@ function selectOpenBox(wager) {
         errorMsg.classList.remove('hide')
         return;
       }
+
+      
       
     });
   });
