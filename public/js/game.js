@@ -61,7 +61,7 @@ function fetchByDate(currentTime, globalOddsInfo) {
 
   setTimeout(() => {
     getGameList(currentTime, globalOddsInfo);
-  }, 1000);
+  }, 500);
 }
 
   
@@ -272,6 +272,9 @@ function renderGameInfo(data, globalOddsInfo) {
   const Q2 = document.querySelector(".Q2Win");
   const Q3 = document.querySelector(".Q3Win");
   const Q4 = document.querySelector(".Q4Win");
+  const imgLogo = document.querySelector('.imgLogo')
+  const scoreBoard = document.querySelector('.scoreCard')
+  
 
   // data.Score.HomeTeam, 'Score:', data.Score.HomeScore
   if (
@@ -293,6 +296,8 @@ function renderGameInfo(data, globalOddsInfo) {
     awayScore.textContent = `${data.Score.AwayScore}`;
     bigHome.textContent = `${data.Score.HomeTeam}`;
     bigAway.textContent = `${data.Score.AwayTeam}`;
+    imgLogo.classList.add('hide')
+    scoreBoard.classList.remove('hide')
   }
 
   if (data.Score.DownAndDistance == null) {
@@ -364,7 +369,6 @@ document.getElementById("clearBtn").classList.add('hide')
 document.getElementById("startBtn").classList.add('hide')
 document.querySelector('.X-box').classList.add('.xText');
   const gameChoice = document.querySelector(".gameChoices");
-  const scoreBoard = document.querySelector('.scoreCard')
   const chooseGameHeader = document.querySelector('.chooseGame')
 
   gameChoice.classList.add("scoreBtnDiv");
@@ -392,7 +396,6 @@ document.querySelector('.X-box').classList.add('.xText');
     choice.onclick = function () {
       gameChoice.classList.add("hide");
       gameChoice.classList.remove("scoreBtnDiv");
-      scoreBoard.classList.remove('hide')
       chooseGameHeader.classList.add('hide')
       console.log("click", keyData);
       let scoreId = localStorage.getItem(keyData);
