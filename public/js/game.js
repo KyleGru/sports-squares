@@ -1,4 +1,9 @@
+const globalOddsInfo = {
+  userNameArr: [],
+  wager: 0
+}
 
+let gameStarted = false
 
 // get game info by game id
 function getSportApi(scoreId, globalOddsInfo) {
@@ -168,10 +173,7 @@ function clearSelectedOpenBoxes() {
   });
 }
 
-const globalOddsInfo = {
-  userNameArr: [],
-  wager: 0
-}
+
 
 function selectOpenBox(wager) {
   const openBoxes = document.querySelectorAll(".open-box");
@@ -182,7 +184,7 @@ function selectOpenBox(wager) {
     box.addEventListener("click", (event) => {
       const placeUsername = localStorage.getItem("username");
 
-       if (!userNameArr.includes(placeUsername)) {
+       if (!userNameArr.includes(placeUsername) && placeUsername !== null) {
         userNameArr.push(placeUsername)
         console.log('userArr', userNameArr)
         playerSquareCount(userNameArr)
@@ -425,7 +427,16 @@ function startSquares(globalOddsInfo) {
     startSquaresBtn.classList.add('hide')
     chooseGame.classList.remove('hide')
     getCurrentDate(globalOddsInfo);
-    // getGameList();
+
+    gameStarted = true
+    if (gameStarted) {
+      const multiplierDiv = document.getElementById('multiplierDiv')
+      const multiplierHeader = document.querySelector('.multi')
+      const scoreBoard = document.querySelector('.scoreCard')
+      multiplierDiv.classList.add('hide')
+      multiplierHeader.classList.add('hide')
+      scoreBoard.classList.remove('hide')
+    }
 }
 
 function clearNumbers() {
