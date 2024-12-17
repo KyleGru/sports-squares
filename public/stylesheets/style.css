@@ -373,9 +373,10 @@ a:active {
   }
 
   .digitalBoard {
-    background-color: rgb(61, 63, 70);
+    background-color: black;
     margin-bottom: 15%;
     border: solid rgb(145, 142, 142) 5px;
+    color: white;
   }
 
   .boardHeader {
@@ -395,6 +396,7 @@ a:active {
   .homeScore {
     font-size: 40pt;
     margin-top: 2%;
+    color: blue;
   }
 
   .awayTeam {
@@ -404,6 +406,7 @@ a:active {
   .awayScore {
     font-size: 40pt;
     margin-top: 2%;
+    color: blue;
   }
 
   .infoContainerH {
