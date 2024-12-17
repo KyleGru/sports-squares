@@ -6,7 +6,7 @@ body {
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
     min-height: 100vh; /* Ensure the entire viewport height is covered */
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .wrapper {
@@ -374,7 +374,7 @@ a:active {
 
   .digitalBoard {
     background-color: black;
-    margin-bottom: 15%;
+    margin-bottom: 10%;
     border: solid rgb(145, 142, 142) 5px;
     color: white;
   }
@@ -390,6 +390,7 @@ a:active {
   }
 
   .homeTeam {
+    margin-top: 15%;
     margin-bottom: 1%;
   }
 
@@ -400,6 +401,7 @@ a:active {
   }
 
   .awayTeam {
+    margin-top: 15%;
     margin-bottom: 1%;
   }
 
@@ -407,6 +409,15 @@ a:active {
     font-size: 40pt;
     margin-top: 2%;
     color: blue;
+  }
+
+  .quarter {
+    margin-top: 8%;
+  }
+
+  .gamePlay {
+    margin-top: 2%;
+    font-size: 12pt;
   }
 
   .infoContainerH {
