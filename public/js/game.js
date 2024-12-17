@@ -1,7 +1,12 @@
+const globalOddsInfo = {
+  userNameArr: [],
+  wager: 0
+}
 
+let gameStarted = false
 
 // get game info by game id
-function getSportApi(scoreId) {
+function getSportApi(scoreId, globalOddsInfo) {
   let requestUrl = `/api/sportFetch/${scoreId}`;
 
   fetch(requestUrl)
@@ -13,21 +18,21 @@ function getSportApi(scoreId) {
       console.log("Quarter: ", data.Score.QuarterDescription);
       console.log(data.Score.AwayTeam, "Score:", data.Score.AwayScore);
       console.log(data.Score.HomeTeam, "Score:", data.Score.HomeScore);
-      renderGameInfo(data);
+      renderGameInfo(data, globalOddsInfo);
       selectWinner(data);
     });
 }
 
-function refreshFetch(scoreId) {
+function refreshFetch(scoreId, globalOddsInfo) {
   setTimeout(() => {
     officialWins = []
     console.log("Refresh ID", scoreId);
     getSportApi(scoreId);
-    saveGameData()
+    saveGameData(globalOddsInfo)
   }, 30000);
 }
 
-function fetchById(scoreId) {
+function fetchById(scoreId, globalOddsInfo) {
   let requestUrl = `/api/sportFetch`;
   console.log("scoreID", scoreId);
   fetch(requestUrl, {
@@ -39,11 +44,11 @@ function fetchById(scoreId) {
   });
 
   setTimeout(() => {
-    getSportApi(scoreId);
+    getSportApi(scoreId, globalOddsInfo);
   }, 1000);
 }
 
-function fetchByDate(currentTime) {
+function fetchByDate(currentTime, globalOddsInfo) {
   let requestUrl = `/api/gamesAvailable`;
   console.log("Post Time", currentTime);
   fetch(requestUrl, {
@@ -55,13 +60,13 @@ function fetchByDate(currentTime) {
   });
 
   setTimeout(() => {
-    getGameList(currentTime);
+    getGameList(currentTime, globalOddsInfo);
   }, 1000);
 }
 
   
 
-function getGameList(currentTime) {
+function getGameList(currentTime, globalOddsInfo) {
   let requestUrl = `/api/gamesAvailable/${currentTime}`;
 
   fetch(requestUrl)
@@ -70,13 +75,13 @@ function getGameList(currentTime) {
     })
     .then(function (data) {
       console.log("Game List: ", data);
-      selectGame(data);
+      selectGame(data, globalOddsInfo);
     });
 }
 
 
 
-function getCurrentDate() {
+function getCurrentDate(globalOddsInfo) {
   let requestUrl = `/api/gameDateInfo`;
 
   fetch(requestUrl)
@@ -88,7 +93,7 @@ function getCurrentDate() {
       let timeData = data.CurrentTime;
       let currentTime = timeData.substr(0, 10);
       console.log("Time Formated: ", currentTime);
-      fetchByDate(currentTime);
+      fetchByDate(currentTime, globalOddsInfo);
     });
 }
 
@@ -168,16 +173,27 @@ function clearSelectedOpenBoxes() {
   });
 }
 
-function selectOpenBox() {
+
+
+function selectOpenBox(wager) {
   const openBoxes = document.querySelectorAll(".open-box");
+  const userNameArr = globalOddsInfo.userNameArr
   
   errorMsg.classList.add('hide')
   openBoxes.forEach((box) => {
     box.addEventListener("click", (event) => {
       const placeUsername = localStorage.getItem("username");
+
+       if (!userNameArr.includes(placeUsername) && placeUsername !== null) {
+        userNameArr.push(placeUsername)
+        console.log('userArr', userNameArr)
+        playerSquareCount(userNameArr)
+       }
+
       if (placeUsername) {
         event.target.textContent = placeUsername;
         event.target.classList.toggle("selected");
+        countSquares(placeUsername)
       } else {
         errorMsg.classList.remove('hide')
         return;
@@ -189,7 +205,60 @@ function selectOpenBox() {
 
 selectOpenBox();
 
-function renderGameInfo(data) {
+function playerSquareCount(userNameArr) {
+const oddsBoard = document.querySelector('#oddsCount')
+const boardFiller = document.querySelector('.oddsTitles')
+
+   userNameArr.forEach((user) => {
+    if (!document.querySelector(`.${user}`)) {
+      const countContainer = document.createElement('div')
+      const username = document.createElement('span')
+      const userCount = document.createElement('span')
+      const wagerAmount = document.createElement('span')
+      oddsBoard.appendChild(countContainer)
+      countContainer.appendChild(username)
+      countContainer.appendChild(userCount)
+      countContainer.appendChild(wagerAmount)
+      boardFiller.classList.remove('boardFiller')
+      username.classList.add(`${user}Tag`)
+      userCount.classList.add(user)
+      wagerAmount.classList.add(`${user}-wager`)
+      countContainer.classList.add('oddsFlex')
+      username.textContent = user
+    }
+    
+  })
+}
+
+function countSquares(placeUsername) {
+  console.log('user count start', placeUsername)
+   const userSelectedSquares = document.querySelector(`.${placeUsername}`)
+   let count = 0
+   TDs.forEach((sq) => {
+    if (sq.textContent === placeUsername) {
+      count = count + 1
+       userSelectedSquares.textContent = count
+    }
+   })
+   const userNameArr = globalOddsInfo.userNameArr
+   const wager = globalOddsInfo.wager
+   wagerMultiplier(userNameArr, wager)
+}
+
+function wagerMultiplier(userNameArr, wager) {
+  console.log('user arr', userNameArr)
+   console.log('wager', wager)
+
+  userNameArr.forEach((user) => {
+    const currentCount = document.querySelector(`.${user}`).textContent
+    const wagerTotal = currentCount * wager
+    const userWager = document.querySelector(`.${user}-wager`)
+    userWager.textContent = `⛃${wagerTotal}`
+  })
+
+}
+
+function renderGameInfo(data, globalOddsInfo) {
   const homeTeam = document.querySelector(".homeTeam");
   const awayTeam = document.querySelector(".awayTeam");
   const quarter = document.querySelector(".quarter");
@@ -286,15 +355,18 @@ function renderGameInfo(data) {
     "margin-bottom: 15%; display: flex; justify-content: center; gap: 20%;";
 
   let scoreId = data.Score.ScoreID;
-  refreshFetch(scoreId);
+  refreshFetch(scoreId, globalOddsInfo);
 }
 
-function selectGame(data) {
+function selectGame(data, globalOddsInfo) {
     document.getElementById("clearOpenBtn").classList.add('hide');
 document.getElementById("clearBtn").classList.add('hide')
 document.getElementById("startBtn").classList.add('hide')
 document.querySelector('.X-box').classList.add('.xText');
   const gameChoice = document.querySelector(".gameChoices");
+  const scoreBoard = document.querySelector('.scoreCard')
+  const chooseGameHeader = document.querySelector('.chooseGame')
+
   gameChoice.classList.add("scoreBtnDiv");
 
   console.log("Select Game", data);
@@ -320,9 +392,11 @@ document.querySelector('.X-box').classList.add('.xText');
     choice.onclick = function () {
       gameChoice.classList.add("hide");
       gameChoice.classList.remove("scoreBtnDiv");
+      scoreBoard.classList.remove('hide')
+      chooseGameHeader.classList.add('hide')
       console.log("click", keyData);
       let scoreId = localStorage.getItem(keyData);
-      fetchById(scoreId);
+      fetchById(scoreId, globalOddsInfo);
       console.log(scoreId);
     };
   }
@@ -354,11 +428,18 @@ function startGame() {
 
 let chooseGame = document.querySelector('.chooseGame')
 
-function startSquares() {
+function startSquares(globalOddsInfo) {
     startSquaresBtn.classList.add('hide')
     chooseGame.classList.remove('hide')
-    getCurrentDate();
-    getGameList();
+    getCurrentDate(globalOddsInfo);
+
+    gameStarted = true
+    if (gameStarted) {
+      const multiplierDiv = document.getElementById('multiplierDiv')
+      const multiplierHeader = document.querySelector('.multi')
+      multiplierDiv.classList.add('hide')
+      multiplierHeader.classList.add('hide')
+    }
 }
 
 function clearNumbers() {
@@ -381,6 +462,8 @@ document.getElementById("clearBtn").addEventListener("click", clearNumbers);
 document.getElementById("startBtn").addEventListener("click", startGame);
 let startSquaresBtn = document.querySelector('.startSquares')
 let resetBtn = document.querySelector('.X-box')
+let multiplierBtn = document.querySelector('.wagerBtn')
+
 
 changeUserBtn.addEventListener("click", function (event) {
   event.preventDefault();
@@ -389,7 +472,7 @@ changeUserBtn.addEventListener("click", function (event) {
 
 startSquaresBtn.addEventListener("click", function (event) {
     event.preventDefault()
-    startSquares()
+    startSquares(globalOddsInfo)
 })
 
 resetBtn.addEventListener("click", function (event) {
@@ -403,6 +486,16 @@ resetBtn.addEventListener("click", function (event) {
     q4Winner.innerHTML = '🏆'
     localStorage.clear()
     location.reload();
+})
+
+multiplierBtn.addEventListener('click', (event) => {
+   event.preventDefault()
+   let userWager = document.querySelector('.wagerInput').value
+   // add function call to multiply btn clicks by wager
+   globalOddsInfo.wager = userWager
+   const userNameArr = globalOddsInfo.userNameArr
+   const wager = globalOddsInfo.wager
+   wagerMultiplier(userNameArr, wager)
 })
 
 function selectWinner(data) {
@@ -569,13 +662,32 @@ function winnerScoreBoard(officialWins, data) {
 
 let TDs = document.querySelectorAll('td')
 
-function saveGameData() {
+function saveGameData(globalOddsInfo) {
+  console.log('saving data')
+  const userNameArr = globalOddsInfo.userNameArr
+  localStorage.setItem('userNameArr', JSON.stringify(userNameArr))
+
+  userNameArr.forEach((user) => {
+    const userSq = document.querySelector(`.${user}`).textContent
+    const wagerAmount = document.querySelector(`.${user}-wager`).textContent
+    const userTag = document.querySelector(`.${user}Tag`).textContent
+    
+      console.log('saving user data')
+      localStorage.setItem(`${user}Tag`, userTag)
+      localStorage.setItem(`${user} Square`, userSq)
+      localStorage.setItem(`${user} Wager`, wagerAmount)
+  
+  })
 
    let i = 0
   TDs.forEach((sq) => {
+    console.log('saving TD data')
      i++
      localStorage.setItem(`TR ${i}`, sq.textContent)
   })
+
+  
+  console.log('saving game data')
   localStorage.setItem('Q1 Winner', q1Winner.textContent)
   localStorage.setItem('Q2 Winner', q2Winner.textContent)
   localStorage.setItem('Q3 Winner', q3Winner.textContent)
@@ -583,6 +695,11 @@ function saveGameData() {
 }
 
 function getGameData() {
+  const userNameArr = JSON.parse(localStorage.getItem('userNameArr'))
+  const oddsBoard = document.querySelector('#oddsCount')
+const boardFiller = document.querySelector('.oddsTitles')
+
+   console.log('parsed arr', userNameArr)
     if(!localStorage.getItem(`TR 1`)) {
         q1Winner.innerHTML = '🏆'
     q2Winner.innerHTML = '🏆'
@@ -594,7 +711,35 @@ function getGameData() {
     TDs.forEach((sq) => {
       i++
       sq.textContent = localStorage.getItem(`TR ${i}`)
+      if (sq.textContent !== 'Open' && !sq.classList.contains('question-box')) {
+        sq.classList.toggle("selected")
+      }
     })
+     userNameArr.forEach((user) => {
+
+      if (userNameArr.length > 0) {
+
+      const countContainer = document.createElement('div')
+      const username = document.createElement('span')
+      const userCount = document.createElement('span')
+      const wagerAmount = document.createElement('span')
+      oddsBoard.appendChild(countContainer)
+      countContainer.appendChild(username)
+      countContainer.appendChild(userCount)
+      countContainer.appendChild(wagerAmount)
+      boardFiller.classList.remove('boardFiller')
+      username.classList.add(`${user}Tag`)
+      userCount.classList.add(user)
+      wagerAmount.classList.add(`${user}-wager`)
+      countContainer.classList.add('oddsFlex')
+      username.textContent = user
+      
+        console.log('saving user data')
+        username.textContent = localStorage.getItem(`${user}Tag`)
+        userCount.textContent = localStorage.getItem(`${user} Square`)
+        wagerAmount.textContent = localStorage.getItem(`${user} Wager`)
+       }
+     })
     q1Winner.textContent = localStorage.getItem('Q1 Winner')
     q2Winner.textContent = localStorage.getItem('Q2 Winner')
     q3Winner.textContent = localStorage.getItem('Q3 Winner')
@@ -603,3 +748,5 @@ function getGameData() {
 }
 
 getGameData();
+
+//Click function by user to keep track of squares

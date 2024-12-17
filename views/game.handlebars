@@ -5,8 +5,36 @@
   <button type="submit" class="changeUsernameBtn btn-submit">submit</button>
 </div>
 <p class="errorMsg">Please Enter A Username!</p>
-    <h4 class="mb-0 has-text-centered has-text-white">Your Squares Game</h4>
-    <div>
+   
+    <div style="margin-top: 4%;">
+      <div class="scoreCard hide" style="font-size: 59px; margin-top: 5%">
+    Score Board
+     <div style="display: flex; font-size: 20px; gap: 4%; justify-content: center; margin-bottom: 5%">
+      <div>
+        <div>Q1</div>
+        <div class="Q1Win"></div>
+           <div class="q1Winner"></div>
+           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
+      </div>
+      <div>
+        <div>Q2</div>
+        <div class="Q2Win"></div>
+           <div class="q2Winner"></div>
+           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
+      </div>
+      <div>
+        <div>Q3</div>
+        <div class="Q3Win"></div>
+           <div class="q3Winner"></div>
+           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
+      </div>
+      <div><div>Q4</div>
+      <div class="Q4Win"></div>
+           <div class="q4Winner"></div>
+           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
+           </div>
+      </div>
+     </div>
       <h4 class="hide chooseGame">Choose A Game:</h4>
       <button class="startSquares">Start Game</button>
       <div class="gameChoices">
@@ -55,7 +83,7 @@
       <div class="card">
          
 
-        <head>
+        {{!-- <head>
           <title>Socket.IO chat</title>
           <style>
             body {
@@ -113,47 +141,34 @@
               background: #efefef;
             }
           </style>
-        </head>
+        </head> --}}
 
         <body>
-          <ul id="messages"></ul>
-          <form id="form" action="">
-            <input id="input" autocomplete="off" /><button>Send</button>
-          </form>
+          {{!-- <span class="theOdds">The Odds</span> --}}
         </body>
       </div>
     </div>
   </div>
-  <div class="bigHomeTeam" style="font-size: 40px; position: absolute; top: 5%; left: -21%;"></div>
-  <div class="bigAwayTeam" style="font-size: 40px; position: absolute; top: -1.75%; left: 45%;"></div>
-  <div class="scoreCard" style="font-size: 59px; position: absolute;top: 10%; left: 9%; width: 90%">
-    Score Board
-     <div style="display: flex; font-size: 20px; gap: 4%; justify-content: center;">
-      <div>
-        <div>Q1</div>
-        <div class="Q1Win"></div>
-           <div class="q1Winner"></div>
-           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
-      </div>
-      <div>
-        <div>Q2</div>
-        <div class="Q2Win"></div>
-           <div class="q2Winner"></div>
-           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
-      </div>
-      <div>
-        <div>Q3</div>
-        <div class="Q3Win"></div>
-           <div class="q3Winner"></div>
-           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
-      </div>
-      <div><div>Q4</div>
-      <div class="Q4Win"></div>
-           <div class="q4Winner"></div>
-           <div contenteditable="true" style="color: rgb(24, 143, 24);">$</div>
-           </div>
+  <div class="bigHomeTeam" style="font-size: 40px; position: absolute; top: 40%; left: -15%;"></div>
+  <div class="bigAwayTeam" style="font-size: 40px; position: absolute; top: -15%; left: 47%;"></div>
+  <div class="theOddsBoard">
+     <span style="font-size: 28px;">The Odds</span>
+     <div>
+      <span class="multi">Multiplier</span>
+     </div>
+     <div id="multiplierDiv">
+     <input type="text" class="wagerInput" placeholder="⛃">
+     <button class="wagerBtn">Set</button>
+     </div>
+     <div id="oddsCount">
+      <div class="oddsTitles boardFiller" style="text-decoration: underline;">
+        <span>User</span>
+        <span>Squares</span>
+        <span>Wager</span>
       </div>
      </div>
+     </div>
+  </div>
   </div>
 
   <script src="/js/game.js"></script>
