@@ -193,6 +193,7 @@ function selectOpenBox(wager) {
       if (placeUsername) {
         event.target.textContent = placeUsername;
         event.target.classList.toggle("selected");
+        event.target.style.pointerEvents = "none";
         countSquares(placeUsername)
       } else {
         errorMsg.classList.remove('hide')
