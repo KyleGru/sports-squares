@@ -372,6 +372,19 @@ a:active {
     justify-content: center;
   }
 
+  .digitalBoard {
+    background-color: rgb(61, 63, 70);
+    margin-bottom: 15%;
+  }
+
+  .homeTeam {
+    margin-bottom: 1%;
+  }
+
+  .awayTeam {
+    margin-bottom: 1%;
+  }
+
   .highlightWinner {
     background-color: goldenrod;
   }
